@@ -5,6 +5,7 @@ import Layout from "../components/Layout";
 import { PostProps } from "../components/Post";
 import prisma from "../lib/prisma";
 import Link from "next/link";
+import ReactMarkdown from "react-markdown";
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const session = await getSession({ req });
@@ -70,7 +71,7 @@ const Drafts: React.FC<Props> = (props) => {
                         </div>
                       </div>
                       <div className="prose max-w-none text-gray-500 dark:text-gray-400">
-                        {post.content}
+                      <ReactMarkdown>{post.content}</ReactMarkdown>
                       </div>
                     </div>
                     <div className="text-base font-medium leading-6">

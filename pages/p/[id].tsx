@@ -54,7 +54,7 @@ const Post: React.FC<PostProps> = (props) => {
                 <div>
                   <h1 className="text-sm mb-10">
                     <Link legacyBehavior href={authorUrl}>
-                      <span>&larr; {props.author.name}</span>
+                      <span className="text-fuchsia-500">&larr; {props.author.name}</span>
                     </Link>
                   </h1>
                   <PageTitle>

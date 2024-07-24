@@ -70,7 +70,7 @@ const Blog: React.FC<Props> = ({ feed = [], authors = [] }) => {
         <div className="divide-y divide-gray-200 dark:divide-gray-700">
           <div className="space-y-2 pb-8 pt-6 md:space-y-5">
             <h2 className="text-2xl font-extrabold leading-9 tracking-tight text-black-900 dark:text-black-100 sm:text-3xl sm:leading-10 md:text-4xl md:leading-14">
-              karya yang tercatat
+              Mutiara
             </h2>
           </div>
           <div className="container py-12">
@@ -91,7 +91,7 @@ const Blog: React.FC<Props> = ({ feed = [], authors = [] }) => {
         <div className="divide-y divide-gray-200 dark:divide-gray-700">
           <div className="space-y-2 pb-8 pt-6 md:space-y-5">
             <h2 className="text-2xl font-extrabold leading-9 tracking-tight text-black-900 dark:text-black-100 sm:text-3xl sm:leading-10 md:text-4xl md:leading-14">
-              Highlighted Poems
+              Sorotan
             </h2>
           </div>
           <div className="container mx-auto px-4 py-8">
