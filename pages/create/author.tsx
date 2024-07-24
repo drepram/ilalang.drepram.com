@@ -26,7 +26,7 @@ const CreateAuthor: React.FC = () => {
       const apiUrl = process.env.NEXT_PUBLIC_API_PATH || 'http://localhost:3000';
       const method = "POST";
 
-      await fetch(apiUrl, {
+      await fetch(`${apiUrl}/api/author`, {
         method,
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
