@@ -1,61 +1,178 @@
-import React from "react"
-import { GetServerSideProps } from "next"
-import ReactMarkdown from "react-markdown"
-import Layout from "../../components/Layout"
-import { PostProps } from "../../components/Post"
+// import React from 'react';
+// import { GetServerSideProps } from 'next';
+// import ReactMarkdown from 'react-markdown';
+// import rehypeRaw from 'rehype-raw';
+// import Router from 'next/router';
+// import Layout from '../../components/Layout';
+// import { PostProps } from '../../components/Post';
+// import { useSession } from 'next-auth/react';
+// import prisma from '../../lib/prisma';
+
+// export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+//   const post = await prisma.post.findUnique({
+//     where: {
+//       id: String(params?.id),
+//     },
+//     include: {
+//       author: {
+//         select: { name: true },
+//       },
+//     },
+//   });
+//   return {
+//     props: JSON.parse(JSON.stringify(post)),
+//   };
+// };
+
+// async function modifyPost(): Promise<void> {
+//   Router.push('/edit/post');
+// }
+
+// const Post: React.FC<PostProps> = (props) => {
+//   const { data: session, status } = useSession();
+//   if (status === 'loading') {
+//     return <div>Authenticating ...</div>;
+//   }
+//   const userHasValidSession = Boolean(session);
+//   const postBelongsToUser = session?.user?.id === props.userId;
+//   let title = props.title;
+//   if (!props.published) {
+//     title = `${title} (Draft)`;
+//   }
+
+//   return (
+//     <Layout>
+//       <div>
+//         <h2>{title}</h2>
+//         <p>oleh {props?.author?.name || 'Unknown author'}</p>
+//         <ReactMarkdown children={props.content} rehypePlugins={[rehypeRaw]} />
+//         {userHasValidSession && postBelongsToUser && (
+//           <button onClick={() => modifyPost()}>Modify</button>
+//         )}
+//       </div>
+//       <style jsx>{`
+//         .page {
+//           background: var(--geist-background);
+//           padding: 2rem;
+//         }
+
+//         .actions {
+//           margin-top: 2rem;
+//         }
+
+//         button {
+//           background: #ececec;
+//           border: 0;
+//           border-radius: 0.125rem;
+//           padding: 1rem 2rem;
+//         }
+
+//         button + button {
+//           margin-left: 1rem;
+//         }
+//       `}</style>
+//     </Layout>
+//   );
+// };
+
+// export default Post;
+
+import React from 'react';
+import { GetServerSideProps } from 'next';
+import ReactMarkdown from 'react-markdown';
+import rehypeRaw from 'rehype-raw';
+import Router from 'next/router';
+import { useSession } from 'next-auth/react';
+import Layout from '../../components/Layout';
+import { PostProps } from '../../components/Post';
+import prisma from '../../lib/prisma';
+import SectionContainer from '../../components/SectionContainer';
+import PageTitle from '../../components/PageTitle';
+import Link from '../../components/Link';
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-  const post = {
-    id: "1",
-    title: "Prisma is the perfect ORM for Next.js",
-    content: "[Prisma](https://github.com/prisma/prisma) and Next.js go _great_ together!",
-    published: false,
-    author: {
-      name: "Nikolas Burk",
-      email: "burk@prisma.io",
+  const post = await prisma.post.findUnique({
+    where: {
+      id: String(params?.id),
     },
-  }
+    include: {
+      author: {
+        select: { name: true, id: true },
+      },
+    },
+  });
   return {
-    props: post,
-  }
+    props: JSON.parse(JSON.stringify(post)),
+  };
+};
+
+async function modifyPost(): Promise<void> {
+  Router.push('/edit/post');
 }
 
 const Post: React.FC<PostProps> = (props) => {
-  let title = props.title
+  const { data: session, status } = useSession();
+  if (status === 'loading') {
+    return <div>Authenticating ...</div>;
+  }
+  const userHasValidSession = Boolean(session);
+  const postBelongsToUser = session?.user?.id === props.userId;
+  let title = props.title;
+  let authorUrl = `/a/${props.author.id}`
   if (!props.published) {
-    title = `${title} (Draft)`
+    title = `${title} (Draft)`;
   }
 
   return (
     <Layout>
-      <div>
-        <h2>{title}</h2>
-        <p>By {props?.author?.name || "Unknown author"}</p>
-        <ReactMarkdown children={props.content} />
-      </div>
-      <style jsx>{`
-        .page {
-          background: white;
-          padding: 2rem;
-        }
-
-        .actions {
-          margin-top: 2rem;
-        }
-
-        button {
-          background: #ececec;
-          border: 0;
-          border-radius: 0.125rem;
-          padding: 1rem 2rem;
-        }
-
-        button + button {
-          margin-left: 1rem;
-        }
-      `}</style>
+      <SectionContainer>
+        <article>
+          <div className="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-3xl lg:px-8">
+            <header>
+              <div className="space-y-1 border-b border-gray-200 pb-10 text-center dark:border-gray-700">
+                <div>
+                  <h1 className="text-sm mb-10">
+                    <Link href={authorUrl}>
+                      <span>&larr; {props.author.name}</span>
+                    </Link>
+                  </h1>
+                  <PageTitle>
+                    <ReactMarkdown>{title}</ReactMarkdown>
+                  </PageTitle>
+                  <div className="mr-3 text-sm font-medium text-gray-500 hover:text-gray-600 dark:hover:text-gray-400"></div>
+                </div>
+              </div>
+            </header>
+            <div className="grid-rows-[auto_1fr] divide-y divide-gray-200 pb-8 dark:divide-gray-700 xl:divide-y-0">
+              <div className="divide-y divide-gray-200 dark:divide-gray-700 xl:col-span-3 xl:row-span-2 xl:pb-0">
+                <div className="prose max-w-none pb-8 pt-10 dark:prose-invert">
+                  <ReactMarkdown children={props.content} rehypePlugins={[rehypeRaw]} />
+                </div>
+              </div>
+              {userHasValidSession && postBelongsToUser && (
+                <div className="pt-4 xl:pt-8">
+                  <button
+                    onClick={() => modifyPost()}
+                    className="flex items-center bg-blue-500 text-white font-bold py-1 px-2 rounded focus:outline-none focus:shadow-outline hover:bg-blue-700"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      className="h-4 w-4 mr-1"
+                    >
+                      <path d="M17.414 2.586a2 2 0 00-2.828 0l-1.172 1.172 2.828 2.828 1.172-1.172a2 2 0 000-2.828zM14 6l-9 9v2h2l9-9-2-2z" />
+                    </svg>
+                    Modify
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>
+        </article>
+      </SectionContainer>
     </Layout>
-  )
-}
+  );
+};
 
-export default Post
+export default Post;
