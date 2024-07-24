@@ -15,11 +15,24 @@ type AuthorProps = {
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const apiUrl = process.env.NEXT_PUBLIC_API_PATH;
+  const apiUrl = process.env.NEXT_PUBLIC_API_PATH || 'http://localhost:3000';
+
+  const fetchData = async (url: string) => {
+    try {
+      const res = await fetch(url);
+      if (!res.ok) {
+        throw new Error(`Failed to fetch from ${url}`);
+      }
+      return res.json();
+    } catch (error) {
+      console.error(`Error fetching data from ${url}:`, error);
+      return null;
+    }
+  };
 
   const [postRes, authorRes] = await Promise.all([
-    fetch(`${apiUrl}/api/post`).then(res => res.json()),
-    fetch(`${apiUrl}/api/author`).then(res => res.json()),
+    fetchData(`${apiUrl}/api/post`),
+    fetchData(`${apiUrl}/api/author`),
   ]);
 
   const feed = postRes || [];
