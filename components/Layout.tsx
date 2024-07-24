@@ -4,12 +4,13 @@ import Footer from "./Footer";
 
 type Props = {
   children: ReactNode;
+  showFooter?: boolean;
 };
 
-const Layout: React.FC<Props> = (props) => (
+const Layout: React.FC<Props> = ({ children, showFooter = true }) => (
   <div>
     <Header />
-    <div className="layout">{props.children}</div>
+    <div className="layout">{children}</div>
     <style jsx global>{`
       html {
         box-sizing: border-box;
@@ -45,7 +46,7 @@ const Layout: React.FC<Props> = (props) => (
         padding: 0 2rem;
       }
     `}</style>
-    <Footer />
+    {showFooter && <Footer />}
   </div>
 );
 

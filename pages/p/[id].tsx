@@ -7,7 +7,6 @@ import { useSession } from "next-auth/react";
 import Layout from "../../components/Layout";
 import { PostProps } from "../../components/Post";
 import prisma from "../../lib/prisma";
-import SectionContainer from "../../components/SectionContainer";
 import PageTitle from "../../components/PageTitle";
 import Link from "next/link";
 
@@ -45,9 +44,9 @@ const Post: React.FC<PostProps> = (props) => {
   }
 
   return (
-    <Layout>
-      <SectionContainer>
-        <article className="mx-auto max-w-full px-4 sm:px-6 lg:px-8">
+    <Layout showFooter={false}>
+      <section className="max-w-screen-sm mx-auto px-4">
+        <article className="mx-auto max-w-full px-4">
           <header>
             <div className="space-y-1 border-b border-gray-200 pb-10 text-center dark:border-gray-700">
               <div>
@@ -62,36 +61,16 @@ const Post: React.FC<PostProps> = (props) => {
               </div>
             </div>
           </header>
-          <div className="divide-y divide-gray-200 pb-8 dark:divide-gray-700 xl:divide-y-0">
-            <div className="divide-y divide-gray-200 dark:divide-gray-700 xl:col-span-3 xl:row-span-2 xl:pb-0">
-              <div className="prose max-w-none pb-8 pt-10 dark:prose-invert">
-                <ReactMarkdown
-                  children={props.content}
-                  rehypePlugins={[rehypeRaw] as any}
-                  components={{
-                    pre({ children }) {
-                      return (
-                        <pre className="whitespace-pre-wrap break-words bg-gray-100 p-4 rounded-md overflow-x-auto w-full">
-                          {children}
-                        </pre>
-                      );
-                    },
-                    code({ node, inline, className, children, ...props }) {
-                      return (
-                        <code
-                          className={`${className} whitespace-pre-wrap break-words`}
-                          {...props}
-                        >
-                          {children}
-                        </code>
-                      );
-                    },
-                  }}
-                />
-              </div>
+          <div className='absolute left-0 right-0 divide-y divide-gray-200 pb-8 dark:divide-gray-700 lg:relative lg:left-auto lg:right-auto lg:divide-y lg:divide-gray-200 lg:pb-8 lg:dark:divide-gray-700'>
+            <div className="prose pb-8 pt-10 dark:prose-invert leading-relaxed mx-auto whitespace-pre-wrap break-words p-2 rounded-md overflow-x-auto">
+              <ReactMarkdown
+                children={props.content}
+                rehypePlugins={[rehypeRaw] as any}
+                className="markdown-content"
+              />
             </div>
             {userHasValidSession && postBelongsToUser && (
-              <div className="pt-4 xl:pt-8">
+              <div className="pt-4">
                 <button
                   onClick={() => modifyPost()}
                   className="flex items-center bg-blue-500 text-white font-bold py-1 px-2 rounded focus:outline-none focus:shadow-outline hover:bg-blue-700"
@@ -110,7 +89,7 @@ const Post: React.FC<PostProps> = (props) => {
             )}
           </div>
         </article>
-      </SectionContainer>
+      </section>
     </Layout>
   );
 };
