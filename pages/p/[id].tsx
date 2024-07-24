@@ -54,7 +54,7 @@ const Post: React.FC<PostProps> = (props) => {
                 <div>
                   <h1 className="text-sm mb-10">
                     <Link legacyBehavior href={authorUrl}>
-                      <span className="text-fuchsia-500">&larr; {props.author.name}</span>
+                      <span className="text-fuchsia-500 hover:underline">&larr; {props.author.name}</span>
                     </Link>
                   </h1>
                   <PageTitle>
@@ -70,6 +70,25 @@ const Post: React.FC<PostProps> = (props) => {
                   <ReactMarkdown
                     children={props.content}
                     rehypePlugins={[rehypeRaw] as any}
+                    components={{
+                      pre({ children }) {
+                        return (
+                          <pre className="whitespace-pre-wrap break-words bg-gray-100 p-2 rounded-md overflow-x-auto">
+                            {children}
+                          </pre>
+                        );
+                      },
+                      code({ node, inline, className, children, ...props }) {
+                        return (
+                          <code
+                            className={`${className} whitespace-pre-wrap break-words`}
+                            {...props}
+                          >
+                            {children}
+                          </code>
+                        );
+                      },
+                    }}
                   />
                 </div>
               </div>
