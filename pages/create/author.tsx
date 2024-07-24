@@ -23,10 +23,10 @@ const CreateAuthor: React.FC = () => {
     e.preventDefault();
     try {
       const body = { name, profilePicture, yearOfLife, bio };
-      const url = `http://localhost:3000/api/author`;
+      const apiUrl = process.env.NEXT_PUBLIC_API_PATH || 'http://localhost:3000';
       const method = "POST";
 
-      await fetch(url, {
+      await fetch(apiUrl, {
         method,
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
