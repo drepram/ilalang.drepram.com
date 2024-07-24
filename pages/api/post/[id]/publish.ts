@@ -1,13 +1,13 @@
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../../auth/[...nextauth]";
-import prisma from '../../../../lib/prisma';
+import prisma from "../../../../lib/prisma";
 
 export default async function handle(req, res) {
   const postId = req.query.id;
   const session = await getServerSession(req, res, authOptions);
 
-  if (req.method !== 'PUT') {
-    return res.status(405).json({ error: 'Method not allowed' });
+  if (req.method !== "PUT") {
+    return res.status(405).json({ error: "Method not allowed" });
   }
 
   if (!session) {

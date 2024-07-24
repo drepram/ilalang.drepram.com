@@ -1,20 +1,20 @@
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../../auth/[...nextauth]";
-import prisma from '../../../../lib/prisma';
+import prisma from "../../../../lib/prisma";
 
 export default async function handle(req, res) {
   const postId = req.query.id;
   const session = await getServerSession(req, res, authOptions);
 
   switch (req.method) {
-    case 'GET':
+    case "GET":
       return getPost(postId, res);
-    case 'PUT':
+    case "PUT":
       return updatePost(postId, req, res, session);
-    case 'DELETE':
+    case "DELETE":
       return deletePost(postId, res, session);
     default:
-      return res.status(405).json({ error: 'Method not allowed' });
+      return res.status(405).json({ error: "Method not allowed" });
   }
 }
 
@@ -27,7 +27,7 @@ async function getPost(postId, res) {
     if (post) {
       res.status(200).json(post);
     } else {
-      res.status(404).json({ error: 'Post not found' });
+      res.status(404).json({ error: "Post not found" });
     }
   } catch (error) {
     console.error("Error fetching post:", error);

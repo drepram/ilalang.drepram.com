@@ -1,21 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import Layout from '../../components/Layout';
-import Router from 'next/router';
-import { useSession, getSession } from 'next-auth/react';
+import React, { useState, useEffect } from "react";
+import Layout from "../../components/Layout";
+import Router from "next/router";
+import { useSession, getSession } from "next-auth/react";
 
 const CreateAuthor: React.FC = () => {
   const { data: session, status } = useSession();
-  const [name, setName] = useState('');
-  const [profilePicture, setProfilePicture] = useState('');
-  const [yearOfLife, setYearOfLife] = useState('');
-  const [bio, setBio] = useState('');
+  const [name, setName] = useState("");
+  const [profilePicture, setProfilePicture] = useState("");
+  const [yearOfLife, setYearOfLife] = useState("");
+  const [bio, setBio] = useState("");
 
   useEffect(() => {
-    if (status === 'loading') {
+    if (status === "loading") {
       return; // Do nothing while loading
     }
     if (!session) {
-      Router.push('/'); // Redirect to home if not authenticated
+      Router.push("/"); // Redirect to home if not authenticated
     }
   }, [session, status]);
 
@@ -24,15 +24,15 @@ const CreateAuthor: React.FC = () => {
     try {
       const body = { name, profilePicture, yearOfLife, bio };
       const url = `http://localhost:3000/api/author`;
-      const method = 'POST';
+      const method = "POST";
 
       await fetch(url, {
         method,
-        headers: { 'Content-Type': 'application/json' },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
       });
 
-      await Router.push('/');
+      await Router.push("/");
     } catch (error) {
       console.error(error);
     }
@@ -41,7 +41,10 @@ const CreateAuthor: React.FC = () => {
   return (
     <Layout>
       <div className="flex items-center justify-center bg-gray-100">
-        <form onSubmit={submitData} className="w-full max-w-lg bg-white rounded-lg shadow-md p-8">
+        <form
+          onSubmit={submitData}
+          className="w-full max-w-lg bg-white rounded-lg shadow-md p-8"
+        >
           <h1 className="text-2xl font-bold mb-6">New Author</h1>
           <div className="mb-4">
             <label className="block text-gray-700">Name</label>
@@ -93,7 +96,7 @@ const CreateAuthor: React.FC = () => {
             />
             <button
               type="button"
-              onClick={() => Router.push('/')}
+              onClick={() => Router.push("/")}
               className="text-gray-700 hover:text-gray-900 ml-4"
             >
               Cancel

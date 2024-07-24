@@ -1,17 +1,17 @@
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../auth/[...nextauth]";
-import prisma from '../../../lib/prisma';
+import prisma from "../../../lib/prisma";
 
 export default async function handle(req, res) {
   const session = await getServerSession(req, res, authOptions);
 
   switch (req.method) {
-    case 'GET':
+    case "GET":
       return getPosts(req, res);
-    case 'POST':
+    case "POST":
       return createPost(req, res, session);
     default:
-      return res.status(405).json({ error: 'Method not allowed' });
+      return res.status(405).json({ error: "Method not allowed" });
   }
 }
 
@@ -19,7 +19,7 @@ async function getPosts(req, res) {
   try {
     const posts = await prisma.post.findMany({
       where: {
-        published: true
+        published: true,
       },
       include: { author: { select: { name: true } } },
     });
@@ -48,8 +48,8 @@ async function createPost(req, res, session) {
         content,
         author: {
           connect: {
-            id: author
-          }
+            id: author,
+          },
         },
         user: { connect: { id: session.user.id } },
       },

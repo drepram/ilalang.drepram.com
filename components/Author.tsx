@@ -7,10 +7,12 @@ export type AuthorProps = {
   profilePicture: string | null;
   yearOfLife: string | null;
   bio: string | null;
-  posts: {
-    id: string;
-    title: string;
-  }[] | null;
+  posts:
+    | {
+        id: string;
+        title: string;
+      }[]
+    | null;
 };
 
 const Author: React.FC<{ author: AuthorProps }> = ({ author }) => {

@@ -43,9 +43,20 @@ const Blog: React.FC<Props> = (props) => {
         <div className="space-y-2 pb-8 pt-6 md:space-y-5">
           <PageTitle>ilalang -- di antara mutiara</PageTitle>
           <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
-          ilalang adalah gulma yang tak diinginkan oleh petani di lahannya, karena daunnya yang tajam menyulitkan orang untuk mengeruk hasil tanah. beberapa orang-orang malang terpaksa menjadi penyintas bagai gulma selama puluhan tahun. situs ini hendak mencatat hasil karya dari sukma para gulma tersebut.
-            <br /><br />
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis ullam aperiam necessitatibus laborum rerum. Vel dolorum asperiores iusto illo doloribus, voluptate beatae consectetur quo ratione voluptatibus, cum quas laudantium accusantium! Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque consequuntur cupiditate odit hic numquam rem, repellendus natus recusandae corporis sed velit a inventore quis obcaecati modi fugit tempora. Sunt, ea!
+            ilalang adalah gulma yang tak diinginkan oleh petani di lahannya,
+            karena daunnya yang tajam menyulitkan orang untuk mengeruk hasil
+            tanah. beberapa orang-orang malang terpaksa menjadi penyintas bagai
+            gulma selama puluhan tahun. situs ini hendak mencatat hasil karya
+            dari sukma para gulma tersebut.
+            <br />
+            <br />
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis
+            ullam aperiam necessitatibus laborum rerum. Vel dolorum asperiores
+            iusto illo doloribus, voluptate beatae consectetur quo ratione
+            voluptatibus, cum quas laudantium accusantium! Lorem ipsum dolor sit
+            amet consectetur adipisicing elit. Atque consequuntur cupiditate
+            odit hic numquam rem, repellendus natus recusandae corporis sed
+            velit a inventore quis obcaecati modi fugit tempora. Sunt, ea!
           </p>
         </div>
 

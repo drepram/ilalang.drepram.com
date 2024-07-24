@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import Layout from '../../components/Layout';
-import Router from 'next/router';
-import { useSession, getSession } from 'next-auth/react';
+import React, { useState, useEffect } from "react";
+import Layout from "../../components/Layout";
+import Router from "next/router";
+import { useSession, getSession } from "next-auth/react";
 
 type Author = {
   id: string;
@@ -14,27 +14,27 @@ type Author = {
 const EditAuthor: React.FC = () => {
   const { data: session, status } = useSession();
   const [authors, setAuthors] = useState<Author[]>([]);
-  const [selectedAuthor, setSelectedAuthor] = useState('');
-  const [name, setName] = useState('');
-  const [profilePicture, setProfilePicture] = useState('');
-  const [yearOfLife, setYearOfLife] = useState('');
-  const [bio, setBio] = useState('');
+  const [selectedAuthor, setSelectedAuthor] = useState("");
+  const [name, setName] = useState("");
+  const [profilePicture, setProfilePicture] = useState("");
+  const [yearOfLife, setYearOfLife] = useState("");
+  const [bio, setBio] = useState("");
 
   useEffect(() => {
-    if (status === 'loading') {
+    if (status === "loading") {
       return; // Do nothing while loading
     }
     if (!session) {
-      Router.push('/'); // Redirect to home if not authenticated
+      Router.push("/"); // Redirect to home if not authenticated
     }
   }, [session, status]);
 
   useEffect(() => {
     // Fetch authors
     if (session) {
-      fetch('http://localhost:3000/api/author')
-        .then(res => res.json())
-        .then(data => setAuthors(data));
+      fetch("http://localhost:3000/api/author")
+        .then((res) => res.json())
+        .then((data) => setAuthors(data));
     }
   }, [session]);
 
@@ -42,12 +42,12 @@ const EditAuthor: React.FC = () => {
     // Fetch author details when an author is selected
     if (selectedAuthor) {
       fetch(`http://localhost:3000/api/author/${selectedAuthor}`)
-        .then(res => res.json())
-        .then(data => {
+        .then((res) => res.json())
+        .then((data) => {
           setName(data.name);
-          setProfilePicture(data.profilePicture || '');
-          setYearOfLife(data.yearOfLife || '');
-          setBio(data.bio || '');
+          setProfilePicture(data.profilePicture || "");
+          setYearOfLife(data.yearOfLife || "");
+          setBio(data.bio || "");
         });
     }
   }, [selectedAuthor]);
@@ -57,23 +57,23 @@ const EditAuthor: React.FC = () => {
     try {
       const body = { name, profilePicture, yearOfLife, bio };
       await fetch(`http://localhost:3000/api/author/${selectedAuthor}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
       });
-      await Router.push('/');
+      await Router.push("/");
     } catch (error) {
       console.error(error);
     }
   };
 
   const deleteAuthor = async () => {
-    if (confirm('Are you sure you want to delete this author?')) {
+    if (confirm("Are you sure you want to delete this author?")) {
       try {
         await fetch(`http://localhost:3000/api/author/${selectedAuthor}`, {
-          method: 'DELETE',
+          method: "DELETE",
         });
-        await Router.push('/');
+        await Router.push("/");
       } catch (error) {
         console.error(error);
       }
@@ -92,7 +92,10 @@ const EditAuthor: React.FC = () => {
   return (
     <Layout>
       <div className="page flex items-center justify-center bg-gray-100">
-        <form onSubmit={submitData} className="w-full max-w-lg bg-white rounded-lg shadow-md p-8">
+        <form
+          onSubmit={submitData}
+          className="w-full max-w-lg bg-white rounded-lg shadow-md p-8"
+        >
           <h1 className="text-2xl font-bold mb-6">Edit Author</h1>
           <div className="mb-4">
             <select
@@ -163,7 +166,7 @@ const EditAuthor: React.FC = () => {
           </div>
           <button
             className="mt-4 text-gray-700 hover:text-gray-900"
-            onClick={() => Router.push('/')}
+            onClick={() => Router.push("/")}
           >
             Cancel
           </button>

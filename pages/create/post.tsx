@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import Layout from '../../components/Layout';
-import Router from 'next/router';
-import { useSession, getSession } from 'next-auth/react';
+import React, { useState, useEffect } from "react";
+import Layout from "../../components/Layout";
+import Router from "next/router";
+import { useSession, getSession } from "next-auth/react";
 
 type Author = {
   id: string;
@@ -10,26 +10,26 @@ type Author = {
 
 const CreatePost: React.FC = () => {
   const { data: session, status } = useSession();
-  const [title, setTitle] = useState('');
+  const [title, setTitle] = useState("");
   const [authors, setAuthors] = useState<Author[]>([]);
-  const [selectedAuthor, setSelectedAuthor] = useState('');
-  const [content, setContent] = useState('');
+  const [selectedAuthor, setSelectedAuthor] = useState("");
+  const [content, setContent] = useState("");
 
   useEffect(() => {
-    if (status === 'loading') {
+    if (status === "loading") {
       return; // Do nothing while loading
     }
     if (!session) {
-      Router.push('/'); // Redirect to home if not authenticated
+      Router.push("/"); // Redirect to home if not authenticated
     }
   }, [session, status]);
 
   useEffect(() => {
     // Fetch authors
     if (session) {
-      fetch('http://localhost:3000/api/author')
-        .then(res => res.json())
-        .then(data => setAuthors(data));
+      fetch("http://localhost:3000/api/author")
+        .then((res) => res.json())
+        .then((data) => setAuthors(data));
     }
   }, [session]);
 
@@ -37,12 +37,12 @@ const CreatePost: React.FC = () => {
     e.preventDefault();
     try {
       const body = { title, content, author: selectedAuthor };
-      await fetch('http://localhost:3000/api/post', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      await fetch("http://localhost:3000/api/post", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
       });
-      await Router.push('/');
+      await Router.push("/");
     } catch (error) {
       console.error(error);
     }
@@ -51,7 +51,10 @@ const CreatePost: React.FC = () => {
   return (
     <Layout>
       <div className="flex items-center justify-center  bg-gray-100">
-        <form onSubmit={submitData} className="w-full max-w-2xl bg-white rounded-lg shadow-md p-8">
+        <form
+          onSubmit={submitData}
+          className="w-full max-w-2xl bg-white rounded-lg shadow-md p-8"
+        >
           <h1 className="text-2xl font-bold mb-6">New Post</h1>
           <div className="mb-4">
             <label className="block text-gray-700">Title</label>
@@ -99,7 +102,7 @@ const CreatePost: React.FC = () => {
             />
             <button
               type="button"
-              onClick={() => Router.push('/')}
+              onClick={() => Router.push("/")}
               className="text-gray-700 hover:text-gray-900 ml-4"
             >
               Cancel

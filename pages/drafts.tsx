@@ -1,9 +1,9 @@
-import React from 'react';
-import { GetServerSideProps } from 'next';
-import { useSession, getSession } from 'next-auth/react';
-import Layout from '../components/Layout';
-import Post, { PostProps } from '../components/Post';
-import prisma from '../lib/prisma';
+import React from "react";
+import { GetServerSideProps } from "next";
+import { useSession, getSession } from "next-auth/react";
+import Layout from "../components/Layout";
+import { PostProps } from "../components/Post";
+import prisma from "../lib/prisma";
 import Link from "../components/Link";
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
@@ -46,28 +46,30 @@ const Drafts: React.FC<Props> = (props) => {
         <h1>Tulisan Belum Tayang</h1>
         <main>
           <ul className="divide-y divide-gray-200 dark:divide-gray-700">
-          {props.drafts.map((post) => (
-          <li key={post.id} className="py-12">
-            <article className="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
-              {/* <dl>
+            {props.drafts.map((post) => (
+              <li key={post.id} className="py-12">
+                <article className="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
+                  {/* <dl>
                 <dt className="sr-only">Published on</dt>
                 <dd className="text-base font-medium leading-6 text-black-500 dark:text-black-400">
                   <time dateTime={post.date}>{post.date}</time>
                 </dd>
               </dl> */}
-              <div className="space-y-5 xl:col-span-3">
-                <div className="space-y-6">
-                  <div>
-                    <h3 className="text-2xl font-bold leading-8 tracking-tight">
-                      <Link href={`/p/${post.id}`}>
-                        <a className="text-black-900 dark:text-black-100">{post.title}</a>
-                      </Link>
-                    </h3>
-                    <div className="mr-3 text-sm font-medium text-pink-500 hover:text-pink-600 dark:hover:text-pink-400">
-                      {post.author.name}
-                    </div>
-                    {/* Uncomment this block if tags are needed in future */}
-                    {/* <div className="flex flex-wrap">
+                  <div className="space-y-5 xl:col-span-3">
+                    <div className="space-y-6">
+                      <div>
+                        <h3 className="text-2xl font-bold leading-8 tracking-tight">
+                          <Link href={`/p/${post.id}`}>
+                            <a className="text-black-900 dark:text-black-100">
+                              {post.title}
+                            </a>
+                          </Link>
+                        </h3>
+                        <div className="mr-3 text-sm font-medium text-pink-500 hover:text-pink-600 dark:hover:text-pink-400">
+                          {post.author.name}
+                        </div>
+                        {/* Uncomment this block if tags are needed in future */}
+                        {/* <div className="flex flex-wrap">
                       {post.tags.map((tag) => (
                         <Link
                           key={tag}
@@ -78,26 +80,26 @@ const Drafts: React.FC<Props> = (props) => {
                         </Link>
                       ))}
                     </div> */}
+                      </div>
+                      <div className="prose max-w-none text-gray-500 dark:text-gray-400">
+                        {post.content}
+                      </div>
+                    </div>
+                    <div className="text-base font-medium leading-6">
+                      <Link href={`/p/${post.id}`}>
+                        <a
+                          className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                          aria-label={`Read "${post.title}"`}
+                        >
+                          Baca &rarr;
+                        </a>
+                      </Link>
+                    </div>
                   </div>
-                  <div className="prose max-w-none text-gray-500 dark:text-gray-400">
-                    {post.content}
-                  </div>
-                </div>
-                <div className="text-base font-medium leading-6">
-                  <Link href={`/p/${post.id}`}>
-                    <a
-                      className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-                      aria-label={`Read "${post.title}"`}
-                    >
-                      Baca &rarr;
-                    </a>
-                  </Link>
-                </div>
-              </div>
-            </article>
-          </li>
-        ))}
-        </ul>
+                </article>
+              </li>
+            ))}
+          </ul>
         </main>
       </div>
       <style jsx>{`

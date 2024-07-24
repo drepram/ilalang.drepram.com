@@ -1,13 +1,13 @@
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../../auth/[...nextauth]";
-import prisma from '../../../../lib/prisma';
+import prisma from "../../../../lib/prisma";
 
 export default async function handle(req, res) {
   const authorId = req.query.id;
   const session = await getServerSession(req, res, authOptions);
 
   // PUT /api/author/:id - Update an author
-  if (req.method === 'PUT') {
+  if (req.method === "PUT") {
     if (!session) {
       return res.status(401).json({ error: "Unauthorized" });
     }
@@ -27,8 +27,8 @@ export default async function handle(req, res) {
       console.error("Error updating author:", error);
       res.status(500).json({ error: "Error updating author" });
     }
-  // DELETE /api/author/:id - Delete an author
-  } else if (req.method === 'DELETE') {
+    // DELETE /api/author/:id - Delete an author
+  } else if (req.method === "DELETE") {
     if (!session) {
       return res.status(401).json({ error: "Unauthorized" });
     }
@@ -41,8 +41,8 @@ export default async function handle(req, res) {
       console.error("Error deleting author:", error);
       res.status(500).json({ error: "Error deleting author" });
     }
-  // GET /api/author/:id - Get a specific author profile
-  } else if (req.method === 'GET') {
+    // GET /api/author/:id - Get a specific author profile
+  } else if (req.method === "GET") {
     try {
       const result = await prisma.author.findUnique({
         where: { id: authorId },
@@ -53,6 +53,6 @@ export default async function handle(req, res) {
       res.status(500).json({ error: "Error getting author" });
     }
   } else {
-    res.status(405).json({ error: 'Method not allowed' });
+    res.status(405).json({ error: "Method not allowed" });
   }
 }

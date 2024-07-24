@@ -423,28 +423,30 @@
 
 // export default Header
 
-import Link from './Link'
-import MobileNav from './MobileNav'
-import ThemeSwitch from './ThemeSwitch'
-import { useRouter } from 'next/router'
-import { signOut, useSession } from 'next-auth/react'
+import Link from "./Link";
+import MobileNav from "./MobileNav";
+import ThemeSwitch from "./ThemeSwitch";
+import { useRouter } from "next/router";
+import { signOut, useSession } from "next-auth/react";
 
 const Header = () => {
-  const router = useRouter()
-  const isActive = (pathname) => router.pathname === pathname
+  const router = useRouter();
+  const isActive = (pathname) => router.pathname === pathname;
 
-  const { data: session, status } = useSession()
+  const { data: session, status } = useSession();
 
   let left = (
-    <div className={`left ${!session ? 'flex justify-center w-full' : 'ml-10'}`}>
+    <div
+      className={`left ${!session ? "flex justify-center w-full" : "ml-10"}`}
+    >
       <Link href="/">
-        <a className="bold" data-active={!isActive('/')}>
+        <a className="bold" data-active={!isActive("/")}>
           ilalang
         </a>
       </Link>
       {session && (
         <Link href="/drafts">
-          <a data-active={!isActive('/drafts')}>My drafts</a>
+          <a data-active={!isActive("/drafts")}>My drafts</a>
         </Link>
       )}
       <style jsx>{`
@@ -458,7 +460,7 @@ const Header = () => {
           display: inline-block;
         }
 
-        .left a[data-active='true'] {
+        .left a[data-active="true"] {
           color: gray;
         }
 
@@ -467,11 +469,11 @@ const Header = () => {
         }
       `}</style>
     </div>
-  )
+  );
 
-  let right = null
+  let right = null;
 
-  if (status === 'loading') {
+  if (status === "loading") {
     right = (
       <div className="right">
         <p>Validating session ...</p>
@@ -481,7 +483,7 @@ const Header = () => {
           }
         `}</style>
       </div>
-    )
+    );
   } else if (!session) {
     right = (
       <div className="right">
@@ -507,7 +509,7 @@ const Header = () => {
           }
         `}</style>
       </div>
-    )
+    );
   } else if (session) {
     right = (
       <div className="right mr-10">
@@ -567,7 +569,7 @@ const Header = () => {
           }
         `}</style>
       </div>
-    )
+    );
   }
 
   return (
@@ -599,7 +601,7 @@ const Header = () => {
         }
       `}</style>
     </header>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;
