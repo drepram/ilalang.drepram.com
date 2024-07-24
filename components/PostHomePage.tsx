@@ -27,9 +27,6 @@ const Post: React.FC<{ post: PostProps }> = ({ post }) => {
         <ReactMarkdown>{post.title}</ReactMarkdown>
       </h2>
       <small className="text-gray-600">oleh {authorName}</small>
-      <div className="prose dark:prose-dark mt-4">
-        <ReactMarkdown>{post.content}</ReactMarkdown>
-      </div>
     </div>
   );
 };
