@@ -16,9 +16,12 @@ type AuthorProps = {
 };
 
 export const getStaticProps: GetStaticProps = async () => {
+  // console.log(1, process.env)
   const [postRes, authorRes] = await Promise.all([
-    fetch("http://localhost:3000/api/post"),
-    fetch("http://localhost:3000/api/author"),
+    fetch(`${process.env.NEXT_PUBLIC_API_PATH}/api/post`),
+    fetch(`${process.env.NEXT_PUBLIC_API_PATH}/api/author`),
+    // fetch("http://localhost:3000/api/post"),
+    // fetch("http://localhost:3000/api/author"),
   ]);
 
   const [feed, authors] = await Promise.all([postRes.json(), authorRes.json()]);

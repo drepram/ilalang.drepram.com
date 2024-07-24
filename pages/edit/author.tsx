@@ -32,7 +32,7 @@ const EditAuthor: React.FC = () => {
   useEffect(() => {
     // Fetch authors
     if (session) {
-      fetch("http://localhost:3000/api/author")
+      fetch(`${process.env.NEXT_PUBLIC_API_PATH}/api/author`)
         .then((res) => res.json())
         .then((data) => setAuthors(data));
     }
@@ -41,7 +41,7 @@ const EditAuthor: React.FC = () => {
   useEffect(() => {
     // Fetch author details when an author is selected
     if (selectedAuthor) {
-      fetch(`http://localhost:3000/api/author/${selectedAuthor}`)
+      fetch(`${process.env.NEXT_PUBLIC_API_PATH}/api/author/${selectedAuthor}`)
         .then((res) => res.json())
         .then((data) => {
           setName(data.name);
@@ -56,7 +56,7 @@ const EditAuthor: React.FC = () => {
     e.preventDefault();
     try {
       const body = { name, profilePicture, yearOfLife, bio };
-      await fetch(`http://localhost:3000/api/author/${selectedAuthor}`, {
+      await fetch(`${process.env.NEXT_PUBLIC_API_PATH}/api/author/${selectedAuthor}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
@@ -70,7 +70,7 @@ const EditAuthor: React.FC = () => {
   const deleteAuthor = async () => {
     if (confirm("Are you sure you want to delete this author?")) {
       try {
-        await fetch(`http://localhost:3000/api/author/${selectedAuthor}`, {
+        await fetch(`${process.env.NEXT_PUBLIC_API_PATH}/api/author/${selectedAuthor}`, {
           method: "DELETE",
         });
         await Router.push("/");

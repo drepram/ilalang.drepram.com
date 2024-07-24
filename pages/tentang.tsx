@@ -7,36 +7,7 @@ import Card from "../components/Card";
 import PageTitle from "../components/PageTitle";
 import SectionContainer from "../components/SectionContainer";
 
-type AuthorProps = {
-  id: string;
-  name: string;
-  profilePicture?: string;
-  bio?: string;
-};
-
-export const getStaticProps: GetStaticProps = async () => {
-  const [postRes, authorRes] = await Promise.all([
-    fetch("http://localhost:3000/api/post"),
-    fetch("http://localhost:3000/api/author"),
-  ]);
-
-  const [feed, authors] = await Promise.all([postRes.json(), authorRes.json()]);
-
-  return {
-    props: {
-      feed: JSON.parse(JSON.stringify(feed)),
-      authors: JSON.parse(JSON.stringify(authors)),
-    },
-    revalidate: 10,
-  };
-};
-
-type Props = {
-  feed: PostProps[];
-  authors: AuthorProps[];
-};
-
-const Blog: React.FC<Props> = (props) => {
+const Blog: React.FC = (props) => {
   return (
     <Layout>
       <SectionContainer>

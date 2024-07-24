@@ -15,6 +15,7 @@ type Post = {
 };
 
 const EditPost: React.FC = () => {
+  console.log(2, process.env)
   const { data: session, status } = useSession();
   const [authors, setAuthors] = useState<Author[]>([]);
   const [posts, setPosts] = useState<Post[]>([]);
@@ -35,14 +36,14 @@ const EditPost: React.FC = () => {
   }, [session, status]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/author")
+    fetch(`${process.env.NEXT_PUBLIC_API_PATH}/api/author`)
       .then((res) => res.json())
       .then((data) => setAuthors(data));
   }, []);
 
   useEffect(() => {
     if (selectedAuthor) {
-      fetch(`http://localhost:3000/api/author/${selectedAuthor}/posts`)
+      fetch(`${process.env.NEXT_PUBLIC_API_PATH}/api/author/${selectedAuthor}/posts`)
         .then((res) => res.json())
         .then((data) => setPosts(data));
     }
@@ -50,7 +51,7 @@ const EditPost: React.FC = () => {
 
   useEffect(() => {
     if (selectedPost) {
-      fetch(`http://localhost:3000/api/post/${selectedPost}`)
+      fetch(`${process.env.NEXT_PUBLIC_API_PATH}/api/post/${selectedPost}`)
         .then((res) => res.json())
         .then((data) => {
           setTitle(data.title);
@@ -70,7 +71,7 @@ const EditPost: React.FC = () => {
         published,
         authorId: newAuthor || selectedAuthor,
       };
-      await fetch(`http://localhost:3000/api/post/${selectedPost}`, {
+      await fetch(`${process.env.NEXT_PUBLIC_API_PATH}/api/post/${selectedPost}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
@@ -84,7 +85,7 @@ const EditPost: React.FC = () => {
   const deletePost = async () => {
     if (confirm("Are you sure you want to delete this post?")) {
       try {
-        await fetch(`http://localhost:3000/api/post/${selectedPost}`, {
+        await fetch(`${process.env.NEXT_PUBLIC_API_PATH}/api/post/${selectedPost}`, {
           method: "DELETE",
         });
         await Router.push("/");

@@ -27,7 +27,7 @@ const CreatePost: React.FC = () => {
   useEffect(() => {
     // Fetch authors
     if (session) {
-      fetch("http://localhost:3000/api/author")
+      fetch(`${process.env.NEXT_PUBLIC_API_PATH}/api/author`)
         .then((res) => res.json())
         .then((data) => setAuthors(data));
     }
@@ -37,7 +37,7 @@ const CreatePost: React.FC = () => {
     e.preventDefault();
     try {
       const body = { title, content, author: selectedAuthor };
-      await fetch("http://localhost:3000/api/post", {
+      await fetch(`${process.env.NEXT_PUBLIC_API_PATH}/api/post`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
