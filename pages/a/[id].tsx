@@ -1,30 +1,49 @@
 import React from "react";
-import { GetServerSideProps } from "next";
+import { GetStaticProps, GetStaticPaths } from "next";
 import Layout from "../../components/Layout";
 import Post, { PostProps } from "../../components/Post";
 import prisma from "../../lib/prisma";
 
-export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+export const getStaticPaths: GetStaticPaths = async () => {
+  const authors = await prisma.author.findMany({
+    select: { id: true },
+  });
+
+  const paths = authors.map((author) => ({
+    params: { id: author.id },
+  }));
+
+  return { paths, fallback: false };
+};
+
+export const getStaticProps: GetStaticProps = async ({ params }) => {
   const authorId = String(params?.id);
 
-  const author = await prisma.author.findUnique({
-    where: {
-      id: authorId,
-    },
-    select: {
-      name: true,
-      profilePicture: true,
-      yearOfLife: true,
-      bio: true,
-    },
-  });
+  let author = null;
+  let posts = [];
 
-  const posts = await prisma.post.findMany({
-    where: {
-      authorId: authorId,
-      published: true,
-    },
-  });
+  try {
+    author = await prisma.author.findUnique({
+      where: {
+        id: authorId,
+      },
+      select: {
+        name: true,
+        profilePicture: true,
+        yearOfLife: true,
+        bio: true,
+      },
+    });
+
+    posts = await prisma.post.findMany({
+      where: {
+        authorId: authorId,
+        published: true,
+      },
+    });
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
 
   if (!author) {
     return {
@@ -37,6 +56,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
       posts: JSON.parse(JSON.stringify(posts)) || [],
       author: JSON.parse(JSON.stringify(author)) || null,
     },
+    revalidate: 10, // Revalidate at most once every 10 seconds
   };
 };
 
