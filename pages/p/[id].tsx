@@ -66,14 +66,14 @@ const Post: React.FC<PostProps> = (props) => {
             </header>
             <div className="grid-rows-[auto_1fr] divide-y divide-gray-200 pb-8 dark:divide-gray-700 xl:divide-y-0">
               <div className="divide-y divide-gray-200 dark:divide-gray-700 xl:col-span-3 xl:row-span-2 xl:pb-0">
-                <div className="prose max-w-none pb-8 pt-10 dark:prose-invert">
+                <div className="prose max-w-max pb-8 pt-10 dark:prose-invert">
                   <ReactMarkdown
                     children={props.content}
                     rehypePlugins={[rehypeRaw] as any}
                     components={{
                       pre({ children }) {
                         return (
-                          <pre className="whitespace-pre-wrap break-words bg-gray-100 p-2 rounded-md overflow-x-auto">
+                          <pre className="text-sm whitespace-pre-wrap break-words bg-gray-100 px-20 rounded-md overflow-x-auto">
                             {children}
                           </pre>
                         );
