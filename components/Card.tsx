@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Link from "./Link";
+import Link from "next/link";
 
 const Card = ({ title, description, imgSrc, href }) => (
   <div className="md max-w-[544px] p-4 md:w-1/2">
@@ -10,7 +10,7 @@ const Card = ({ title, description, imgSrc, href }) => (
     >
       {imgSrc &&
         (href ? (
-          <Link href={href} aria-label={`Link to ${title}`}>
+          <Link href={href} aria-label={`Link to ${title}`}  legacyBehavior>
             <Image
               alt={title}
               src={imgSrc}
@@ -31,7 +31,7 @@ const Card = ({ title, description, imgSrc, href }) => (
       <div className="p-6">
         <h2 className="mb-3 text-2xl font-bold leading-8 tracking-tight">
           {href ? (
-            <Link href={href} aria-label={`Link to ${title}`}>
+            <Link href={href} aria-label={`Link to ${title}`}  legacyBehavior>
               {title}
             </Link>
           ) : (
@@ -43,7 +43,7 @@ const Card = ({ title, description, imgSrc, href }) => (
         </p>
         {href && (
           <div className="text-base font-medium leading-6 text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
-            <Link href={href} aria-label={`Link to ${title}`}>
+            <Link href={href} aria-label={`Link to ${title}`}  legacyBehavior>
               Learn more &rarr;
             </Link>
           </div>

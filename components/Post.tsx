@@ -7,6 +7,7 @@ export type PostProps = {
   title: string;
   author: {
     name: string;
+    id: string;
   } | null;
   user: {
     email: string;
@@ -14,6 +15,7 @@ export type PostProps = {
   content: string;
   published: boolean;
   createdAt: string;
+  userId: string;
 };
 
 const Post: React.FC<{ post: PostProps }> = ({ post }) => {

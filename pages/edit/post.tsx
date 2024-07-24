@@ -15,7 +15,6 @@ type Post = {
 };
 
 const EditPost: React.FC = () => {
-  console.log(2, process.env)
   const { data: session, status } = useSession();
   const [authors, setAuthors] = useState<Author[]>([]);
   const [posts, setPosts] = useState<Post[]>([]);

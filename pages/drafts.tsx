@@ -4,7 +4,7 @@ import { useSession, getSession } from "next-auth/react";
 import Layout from "../components/Layout";
 import { PostProps } from "../components/Post";
 import prisma from "../lib/prisma";
-import Link from "../components/Link";
+import Link from "next/link";
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const session = await getSession({ req });
@@ -59,7 +59,7 @@ const Drafts: React.FC<Props> = (props) => {
                     <div className="space-y-6">
                       <div>
                         <h3 className="text-2xl font-bold leading-8 tracking-tight">
-                          <Link href={`/p/${post.id}`}>
+                          <Link href={`/p/${post.id}`} legacyBehavior>
                             <a className="text-black-900 dark:text-black-100">
                               {post.title}
                             </a>
@@ -68,25 +68,13 @@ const Drafts: React.FC<Props> = (props) => {
                         <div className="mr-3 text-sm font-medium text-pink-500 hover:text-pink-600 dark:hover:text-pink-400">
                           {post.author.name}
                         </div>
-                        {/* Uncomment this block if tags are needed in future */}
-                        {/* <div className="flex flex-wrap">
-                      {post.tags.map((tag) => (
-                        <Link
-                          key={tag}
-                          href={`/tags/${tag}`}
-                          className="mr-3 text-sm font-medium uppercase text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-                        >
-                          {tag}
-                        </Link>
-                      ))}
-                    </div> */}
                       </div>
                       <div className="prose max-w-none text-gray-500 dark:text-gray-400">
                         {post.content}
                       </div>
                     </div>
                     <div className="text-base font-medium leading-6">
-                      <Link href={`/p/${post.id}`}>
+                      <Link href={`/p/${post.id}`} legacyBehavior>
                         <a
                           className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
                           aria-label={`Read "${post.title}"`}

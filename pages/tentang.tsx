@@ -1,9 +1,5 @@
 import React from "react";
-import { GetStaticProps } from "next";
 import Layout from "../components/Layout";
-import Post, { PostProps } from "../components/Post";
-import PostHomePage from "../components/PostHomePage";
-import Card from "../components/Card";
 import PageTitle from "../components/PageTitle";
 import SectionContainer from "../components/SectionContainer";
 

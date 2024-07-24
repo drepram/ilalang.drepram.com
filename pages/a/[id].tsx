@@ -34,8 +34,8 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 
   return {
     props: {
-      posts: JSON.parse(JSON.stringify(posts)),
-      author: JSON.parse(JSON.stringify(author)),
+      posts: JSON.parse(JSON.stringify(posts)) || [],
+      author: JSON.parse(JSON.stringify(author)) || null,
     },
   };
 };
@@ -47,10 +47,20 @@ type Props = {
     profilePicture: string;
     yearOfLife: string;
     bio: string;
-  };
+  } | null;
 };
 
 const Drafts: React.FC<Props> = ({ posts, author }) => {
+  if (!author) {
+    return (
+      <Layout>
+        <div className="page">
+          <h1>Author not found.</h1>
+        </div>
+      </Layout>
+    );
+  }
+
   if (!posts.length) {
     return (
       <Layout>
@@ -87,7 +97,7 @@ const Drafts: React.FC<Props> = ({ posts, author }) => {
           <div className="container mx-auto px-4 py-8">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {posts.map((post) => (
-                <Post post={post} />
+                <Post key={post.id} post={post} />
               ))}
             </div>
           </div>

@@ -3,7 +3,6 @@ import { GetStaticProps } from "next";
 import Layout from "../components/Layout";
 import Post, { PostProps } from "../components/Post";
 import PostHomePage from "../components/PostHomePage";
-import Link from "../components/Link";
 import Card from "../components/Card";
 import PageTitle from "../components/PageTitle";
 import SectionContainer from "../components/SectionContainer";
@@ -16,15 +15,15 @@ type AuthorProps = {
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  // console.log(1, process.env)
+  const apiUrl = process.env.NEXT_PUBLIC_API_PATH;
+
   const [postRes, authorRes] = await Promise.all([
-    fetch(`${process.env.NEXT_PUBLIC_API_PATH}/api/post`),
-    fetch(`${process.env.NEXT_PUBLIC_API_PATH}/api/author`),
-    // fetch("http://localhost:3000/api/post"),
-    // fetch("http://localhost:3000/api/author"),
+    fetch(`${apiUrl}/api/post`).then(res => res.json()),
+    fetch(`${apiUrl}/api/author`).then(res => res.json()),
   ]);
 
-  const [feed, authors] = await Promise.all([postRes.json(), authorRes.json()]);
+  const feed = postRes || [];
+  const authors = authorRes || [];
 
   return {
     props: {
@@ -40,7 +39,7 @@ type Props = {
   authors: AuthorProps[];
 };
 
-const Blog: React.FC<Props> = (props) => {
+const Blog: React.FC<Props> = ({ feed = [], authors = [] }) => {
   return (
     <Layout>
       <SectionContainer>
@@ -63,12 +62,12 @@ const Blog: React.FC<Props> = (props) => {
           </div>
           <div className="container py-12">
             <div className="-m-4 flex flex-wrap">
-              {props.authors.map((author) => (
+              {authors.map((author) => (
                 <Card
                   key={author.id}
                   title={author.name}
-                  description={author.bio}
-                  imgSrc={author.profilePicture}
+                  description={author.bio || "No bio available"}
+                  imgSrc={author.profilePicture || "/default-profile.png"}
                   href={`/a/${author.id}`}
                 />
               ))}
@@ -84,8 +83,8 @@ const Blog: React.FC<Props> = (props) => {
           </div>
           <div className="container mx-auto px-4 py-8">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-              {props.feed.map((post) => (
-                <PostHomePage post={post} />
+              {feed.map((post) => (
+                <PostHomePage key={post.id} post={post} />
               ))}
             </div>
           </div>

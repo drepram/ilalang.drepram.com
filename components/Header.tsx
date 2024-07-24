@@ -1,4 +1,4 @@
-import Link from "./Link";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { signOut, useSession } from "next-auth/react";
 
@@ -9,16 +9,14 @@ const Header = () => {
   const { data: session, status } = useSession();
 
   let left = (
-    <div
-      className={`left ${!session ? "flex justify-center w-full" : "ml-10"}`}
-    >
-      <Link href="/">
+    <div className={`left ${!session ? "flex justify-center w-full" : "ml-10"}`}>
+      <Link legacyBehavior href="/">
         <a className="bold" data-active={!isActive("/")}>
           ilalang
         </a>
       </Link>
       {session && (
-        <Link href="/drafts">
+        <Link legacyBehavior href="/drafts">
           <a data-active={!isActive("/drafts")}>My drafts</a>
         </Link>
       )}
@@ -86,23 +84,23 @@ const Header = () => {
   } else if (session) {
     right = (
       <div className="right mr-10">
-        <p>({session.user.email})</p>
-        <Link href="/create/post">
+        <p>({session.user?.email})</p>
+        <Link legacyBehavior href="/create/post">
           <button>
             <a>New post</a>
           </button>
         </Link>
-        <Link href="/create/author">
+        <Link legacyBehavior href="/create/author">
           <button>
             <a>New author</a>
           </button>
         </Link>
-        <Link href="/edit/post">
+        <Link legacyBehavior href="/edit/post">
           <button>
             <a>Edit post</a>
           </button>
         </Link>
-        <Link href="/edit/author">
+        <Link legacyBehavior href="/edit/author">
           <button>
             <a>Edit author</a>
           </button>
@@ -148,7 +146,6 @@ const Header = () => {
   return (
     <header className="flex items-center justify-between py-10">
       {left}
-      {session}
       {right}
       <style jsx>{`
         nav {

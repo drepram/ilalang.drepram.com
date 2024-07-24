@@ -9,7 +9,7 @@ import { PostProps } from "../../components/Post";
 import prisma from "../../lib/prisma";
 import SectionContainer from "../../components/SectionContainer";
 import PageTitle from "../../components/PageTitle";
-import Link from "../../components/Link";
+import Link from "next/link";
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const post = await prisma.post.findUnique({
@@ -53,7 +53,7 @@ const Post: React.FC<PostProps> = (props) => {
               <div className="space-y-1 border-b border-gray-200 pb-10 text-center dark:border-gray-700">
                 <div>
                   <h1 className="text-sm mb-10">
-                    <Link href={authorUrl}>
+                    <Link legacyBehavior href={authorUrl}>
                       <span>&larr; {props.author.name}</span>
                     </Link>
                   </h1>
@@ -69,7 +69,7 @@ const Post: React.FC<PostProps> = (props) => {
                 <div className="prose max-w-none pb-8 pt-10 dark:prose-invert">
                   <ReactMarkdown
                     children={props.content}
-                    rehypePlugins={[rehypeRaw]}
+                    rehypePlugins={[rehypeRaw] as any}
                   />
                 </div>
               </div>

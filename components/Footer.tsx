@@ -20,7 +20,7 @@ export default function Footer() {
           <div>{` • `}</div> */}
           <div>{`${new Date().getFullYear()}`}</div>
           <div>{` • `}</div>
-          <Link href="/tentang">
+          <Link legacyBehavior href="/tentang">
             <a className="text-cyan-500">tentang</a>
           </Link>
         </div>
