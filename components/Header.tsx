@@ -45,16 +45,7 @@ const Header = () => {
   let right = null;
 
   if (status === "loading") {
-    right = (
-      <div className="right">
-        <p>Validating session ...</p>
-        <style jsx>{`
-          .right {
-            margin-left: auto;
-          }
-        `}</style>
-      </div>
-    );
+    right = false;
   } else if (!session) {
     right = (
       <div className="right">
