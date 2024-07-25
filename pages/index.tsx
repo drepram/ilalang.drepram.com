@@ -31,7 +31,7 @@ export const getStaticProps: GetStaticProps = async () => {
   };
 
   const [postRes, authorRes] = await Promise.all([
-    fetchData(`${apiUrl}/api/post`),
+    fetchData(`${apiUrl}/api/post?highlighted=true`),
     fetchData(`${apiUrl}/api/author`),
   ]);
 

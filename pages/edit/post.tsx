@@ -12,6 +12,7 @@ type Post = {
   id: string;
   title: string;
   published: boolean;
+  highlighted: boolean;
 };
 
 const EditPost: React.FC = () => {
@@ -23,6 +24,7 @@ const EditPost: React.FC = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [published, setPublished] = useState(false);
+  const [highlighted, setHighlighted] = useState(false);
   const [newAuthor, setNewAuthor] = useState("");
 
   useEffect(() => {
@@ -56,6 +58,7 @@ const EditPost: React.FC = () => {
           setTitle(data.title);
           setContent(data.content);
           setPublished(data.published);
+          setHighlighted(data.highlighted);
           setSelectedAuthor(data.authorId); // Set the selected author to the post's current author
         });
     }
@@ -68,6 +71,7 @@ const EditPost: React.FC = () => {
         title,
         content,
         published,
+        highlighted,
         authorId: newAuthor || selectedAuthor,
       };
       await fetch(`${process.env.NEXT_PUBLIC_API_PATH}/api/post/${selectedPost}`, {
@@ -163,6 +167,17 @@ const EditPost: React.FC = () => {
               className="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
             >
               <option value="true">Published</option>
+              <option value="false">Draft</option>
+            </select>
+          </div>
+          <div className="mb-4">
+            <label className="block text-gray-700">Status</label>
+            <select
+              value={highlighted.toString()}
+              onChange={(e) => setHighlighted(e.target.value === "true")}
+              className="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+            >
+              <option value="true">Highlighted</option>
               <option value="false">Draft</option>
             </select>
           </div>

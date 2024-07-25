@@ -13,6 +13,7 @@ export type PostProps = {
   } | null;
   content: string;
   published: boolean;
+  highlighted: boolean;
   createdAt: string;
 };
 

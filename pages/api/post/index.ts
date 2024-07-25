@@ -16,10 +16,13 @@ export default async function handle(req, res) {
 }
 
 async function getPosts(req, res) {
+  const { highlighted } = req.query;
+
   try {
     const posts = await prisma.post.findMany({
       where: {
         published: true,
+        ...(highlighted === 'true' && { highlighted: true }),
       },
       include: { author: { select: { name: true } } },
     });
@@ -35,7 +38,7 @@ async function createPost(req, res, session) {
     return res.status(401).json({ error: "Unauthorized" });
   }
 
-  const { title, content, author } = req.body;
+  const { title, content, author, highlighted } = req.body;
 
   if (!title) {
     return res.status(400).json({ error: "Title is required" });
@@ -52,6 +55,7 @@ async function createPost(req, res, session) {
           },
         },
         user: { connect: { id: session.user.id } },
+        highlighted: highlighted || false,
       },
     });
 

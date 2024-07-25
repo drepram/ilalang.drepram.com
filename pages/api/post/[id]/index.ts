@@ -40,12 +40,12 @@ async function updatePost(postId, req, res, session) {
     return res.status(401).json({ error: "Unauthorized" });
   }
 
-  const { title, content, published, authorId } = req.body;
+  const { title, content, published, highlighted, authorId } = req.body;
 
   try {
     const updatedPost = await prisma.post.update({
       where: { id: postId },
-      data: { title, content, published, authorId },
+      data: { title, content, published, highlighted, authorId },
     });
     res.status(200).json(updatedPost);
   } catch (error) {
