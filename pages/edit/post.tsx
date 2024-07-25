@@ -171,14 +171,14 @@ const EditPost: React.FC = () => {
             </select>
           </div>
           <div className="mb-4">
-            <label className="block text-gray-700">Status</label>
+            <label className="block text-gray-700">Highlighted</label>
             <select
               value={highlighted.toString()}
               onChange={(e) => setHighlighted(e.target.value === "true")}
               className="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
             >
-              <option value="true">Highlighted</option>
-              <option value="false">Draft</option>
+              <option value="true">Yes</option>
+              <option value="false">No</option>
             </select>
           </div>
           <div className="mb-4">
