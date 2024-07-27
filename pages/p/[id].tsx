@@ -1,36 +1,58 @@
 import React from "react";
-import { GetServerSideProps } from "next";
+import { GetStaticPaths, GetStaticProps } from "next";
 import ReactMarkdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
 import Router from "next/router";
 import { useSession } from "next-auth/react";
 import Layout from "../../components/Layout";
-import { PostProps } from "../../components/Post";
 import prisma from "../../lib/prisma";
 import PageTitle from "../../components/PageTitle";
 import Link from "next/link";
+import { Post as TPost, Author as TAuthor } from "@prisma/client";
 
-export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-  const post = await prisma.post.findUnique({
-    where: {
-      id: String(params?.id),
-    },
-    include: {
-      author: {
-        select: { name: true, id: true },
-      },
+interface Props extends TPost {
+  author: TAuthor;
+}
+
+export const getStaticPaths = (async () => {
+  const posts = await prisma.post.findMany({
+    select: {
+      id: true,
     },
   });
+
   return {
-    props: JSON.parse(JSON.stringify(post)),
+    paths: posts.map((post) => ({
+      params: { id: post.id },
+    })),
+    fallback: true,
   };
-};
+}) satisfies GetStaticPaths;
+
+export const getStaticProps = (async (context) => {
+  const postId = String(context.params?.id);
+  const post = await prisma.post
+    .findUnique({
+      where: {
+        id: postId,
+      },
+      include: {
+        author: true,
+      },
+    })
+    .then((post) => JSON.parse(JSON.stringify(post)));
+
+  return {
+    props: post,
+    revalidate: 60 * 10,
+  };
+}) satisfies GetStaticProps<Props>;
 
 async function modifyPost(): Promise<void> {
   Router.push("/edit/post");
 }
 
-const Post: React.FC<PostProps> = (props) => {
+const Post: React.FC<Props> = (props) => {
   const { data: session, status } = useSession();
   if (status === "loading") {
     return <div>Authenticating ...</div>;
@@ -52,7 +74,9 @@ const Post: React.FC<PostProps> = (props) => {
               <div>
                 <h1 className="text-sm mb-10">
                   <Link legacyBehavior href={authorUrl}>
-                    <span className="text-fuchsia-500 hover:underline">&larr; {props.author.name}</span>
+                    <span className="text-fuchsia-500 hover:underline">
+                      &larr; {props.author.name}
+                    </span>
                   </Link>
                 </h1>
                 <PageTitle>
@@ -61,13 +85,14 @@ const Post: React.FC<PostProps> = (props) => {
               </div>
             </div>
           </header>
-          <div className='absolute left-0 right-0 divide-y divide-gray-200 pb-8 dark:divide-gray-700 lg:relative lg:left-auto lg:right-auto lg:divide-y lg:divide-gray-200 lg:pb-8 lg:dark:divide-gray-700'>
+          <div className="absolute left-0 right-0 divide-y divide-gray-200 pb-8 dark:divide-gray-700 lg:relative lg:left-auto lg:right-auto lg:divide-y lg:divide-gray-200 lg:pb-8 lg:dark:divide-gray-700">
             <div className="prose pb-8 pt-10 dark:prose-invert leading-relaxed mx-auto whitespace-pre-wrap break-words p-2 rounded-md overflow-x-auto">
               <ReactMarkdown
-                children={props.content}
                 rehypePlugins={[rehypeRaw] as any}
                 className="markdown-content"
-              />
+              >
+                {props.content}
+              </ReactMarkdown>
             </div>
             {userHasValidSession && postBelongsToUser && (
               <div className="pt-4">
