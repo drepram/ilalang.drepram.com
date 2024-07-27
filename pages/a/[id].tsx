@@ -1,30 +1,46 @@
 import React from "react";
-import { GetServerSideProps } from "next";
+import { GetStaticPaths, GetStaticProps } from "next";
 import Layout from "../../components/Layout";
-import Post, { PostProps } from "../../components/Post";
+import Post from "../../components/Post";
 import prisma from "../../lib/prisma";
+import type { Author as TAuthor, Post as TPost } from "@prisma/client";
 
-export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-  const authorId = String(params?.id);
+interface Props extends TAuthor {
+  posts: TPost[];
+}
 
-  const author = await prisma.author.findUnique({
-    where: {
-      id: authorId,
-    },
+export const getStaticPaths = (async () => {
+  const authors = await prisma.author.findMany({
     select: {
-      name: true,
-      profilePicture: true,
-      yearOfLife: true,
-      bio: true,
+      id: true,
     },
   });
 
-  const posts = await prisma.post.findMany({
-    where: {
-      authorId: authorId,
-      published: true,
-    },
-  });
+  return {
+    paths: authors.map((author) => ({
+      params: { id: author.id },
+    })),
+    fallback: true,
+  };
+}) satisfies GetStaticPaths;
+
+export const getStaticProps = (async (context) => {
+  const authorId = String(context.params?.id);
+
+  const author = await prisma.author
+    .findUnique({
+      where: {
+        id: authorId,
+      },
+      include: {
+        posts: {
+          where: {
+            published: true,
+          },
+        },
+      },
+    })
+    .then((author) => JSON.parse(JSON.stringify(author)));
 
   if (!author) {
     return {
@@ -33,35 +49,13 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   }
 
   return {
-    props: {
-      posts: JSON.parse(JSON.stringify(posts)) || [],
-      author: JSON.parse(JSON.stringify(author)) || null,
-    },
+    props: author,
+    revalidate: 60 * 10,
   };
-};
+}) satisfies GetStaticProps<Props>;
 
-type Props = {
-  posts: PostProps[];
-  author: {
-    name: string;
-    profilePicture: string;
-    yearOfLife: string;
-    bio: string;
-  } | null;
-};
-
-const Drafts: React.FC<Props> = ({ posts, author }) => {
-  if (!author) {
-    return (
-      <Layout>
-        <div className="page">
-          <h1>Author not found.</h1>
-        </div>
-      </Layout>
-    );
-  }
-
-  if (!posts.length) {
+const AuthorPage: React.FC<Props> = (author) => {
+  if (!author.posts) {
     return (
       <Layout>
         <div className="page">
@@ -96,8 +90,8 @@ const Drafts: React.FC<Props> = ({ posts, author }) => {
         <main className="mt-6 space-y-6">
           <div className="container mx-auto px-4 py-8">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-              {posts.map((post) => (
-                <Post key={post.id} post={post} />
+              {author.posts.map((post) => (
+                <Post key={post.id} post={post} author={author} />
               ))}
             </div>
           </div>
@@ -121,4 +115,4 @@ const Drafts: React.FC<Props> = ({ posts, author }) => {
   );
 };
 
-export default Drafts;
+export default AuthorPage;

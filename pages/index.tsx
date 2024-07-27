@@ -1,58 +1,47 @@
 import React from "react";
 import { GetStaticProps } from "next";
 import Layout from "../components/Layout";
-import Post, { PostProps } from "../components/Post";
 import PostHomePage from "../components/PostHomePage";
 import Card from "../components/Card";
 import PageTitle from "../components/PageTitle";
 import SectionContainer from "../components/SectionContainer";
-
-type AuthorProps = {
-  id: string;
-  name: string;
-  profilePicture?: string;
-  bio?: string;
-};
+import prisma from "../lib/prisma";
+import { Author as TAuthor, Post as TPost } from "@prisma/client";
 
 export const getStaticProps: GetStaticProps = async () => {
-  const apiUrl = process.env.NEXT_PUBLIC_API_PATH || 'http://localhost:3000';
+  const feed = await prisma.post
+    .findMany({
+      where: {
+        highlighted: true,
+        published: true,
+      },
+      include: {
+        author: true,
+      },
+    })
+    .then((posts) => JSON.parse(JSON.stringify(posts)));
 
-  const fetchData = async (url: string) => {
-    try {
-      const res = await fetch(url);
-      if (!res.ok) {
-        throw new Error(`Failed to fetch from ${url}`);
-      }
-      return res.json();
-    } catch (error) {
-      console.error(`Error fetching data from ${url}:`, error);
-      return null;
-    }
-  };
-
-  const [postRes, authorRes] = await Promise.all([
-    fetchData(`${apiUrl}/api/post?highlighted=true`),
-    fetchData(`${apiUrl}/api/author`),
-  ]);
-
-  const feed = postRes || [];
-  const authors = authorRes || [];
+  const authors = await prisma.author
+    .findMany()
+    .then((authors) => JSON.parse(JSON.stringify(authors)));
 
   return {
     props: {
-      feed: JSON.parse(JSON.stringify(feed)),
-      authors: JSON.parse(JSON.stringify(authors)),
+      feed,
+      authors,
     },
-    revalidate: 10,
+    revalidate: 60 * 10,
   };
 };
 
+type PostWithAuthor = TPost & { author: TAuthor };
+
 type Props = {
-  feed: PostProps[];
-  authors: AuthorProps[];
+  feed: PostWithAuthor[];
+  authors: TAuthor[];
 };
 
-const Blog: React.FC<Props> = ({ feed = [], authors = [] }) => {
+const Blog: React.FC<Props> = ({ feed, authors }) => {
   return (
     <Layout>
       <SectionContainer>
@@ -97,7 +86,7 @@ const Blog: React.FC<Props> = ({ feed = [], authors = [] }) => {
           <div className="container mx-auto px-4 py-8">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {feed.map((post) => (
-                <PostHomePage key={post.id} post={post} />
+                <PostHomePage key={post.id} post={post} author={post.author} />
               ))}
             </div>
           </div>

@@ -2,10 +2,10 @@ import React from "react";
 import { GetServerSideProps } from "next";
 import { useSession, getSession } from "next-auth/react";
 import Layout from "../components/Layout";
-import { PostProps } from "../components/Post";
 import prisma from "../lib/prisma";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
+import { Post as PostProps, Author as AuthorProps } from "@prisma/client";
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const session = await getSession({ req });
@@ -25,8 +25,12 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   };
 };
 
+type PostWithAuthor = PostProps & {
+  author: AuthorProps;
+};
+
 type Props = {
-  drafts: PostProps[];
+  drafts: PostWithAuthor[];
 };
 
 const Drafts: React.FC<Props> = (props) => {
@@ -71,7 +75,7 @@ const Drafts: React.FC<Props> = (props) => {
                         </div>
                       </div>
                       <div className="prose max-w-none text-gray-500 dark:text-gray-400">
-                      <ReactMarkdown>{post.content}</ReactMarkdown>
+                        <ReactMarkdown>{post.content}</ReactMarkdown>
                       </div>
                     </div>
                     <div className="text-base font-medium leading-6">
