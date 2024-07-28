@@ -8,6 +8,7 @@ import Layout from "../../components/Layout";
 import prisma from "../../lib/prisma";
 import PageTitle from "../../components/PageTitle";
 import Link from "next/link";
+import Head from "next/head";
 import { Post as TPost, Author as TAuthor } from "@prisma/client";
 
 interface Props extends TPost {
@@ -67,6 +68,13 @@ const Post: React.FC<Props> = (props) => {
 
   return (
     <Layout showFooter={false}>
+      <Head>
+        <title>{`${title} [${props.author.name}] -- ilalang`}</title>
+        <meta
+          name="description"
+          content={`Baca "${title}" karya ${props.author.name} di ilalang`}
+        />
+      </Head>
       <section className="max-w-screen-sm mx-auto px-4">
         <article className="mx-auto max-w-full px-4">
           <header>

@@ -7,6 +7,7 @@ import PageTitle from "../components/PageTitle";
 import SectionContainer from "../components/SectionContainer";
 import prisma from "../lib/prisma";
 import { Author as TAuthor, Post as TPost } from "@prisma/client";
+import Head from "next/head";
 
 export const getStaticProps: GetStaticProps = async () => {
   const feed = await prisma.post
@@ -44,6 +45,13 @@ type Props = {
 const Blog: React.FC<Props> = ({ feed, authors }) => {
   return (
     <Layout>
+      <Head>
+        <title>{`ilalang -- di antara mutiara`}</title>
+        <meta
+          name="description"
+          content={`Repositori Karya Para Ilalang`}
+        />
+      </Head>
       <SectionContainer>
         <div className="space-y-2 pb-8 pt-6 md:space-y-5">
           <PageTitle>ilalang -- di antara mutiara</PageTitle>

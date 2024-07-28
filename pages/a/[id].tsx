@@ -4,6 +4,7 @@ import Layout from "../../components/Layout";
 import Post from "../../components/Post";
 import prisma from "../../lib/prisma";
 import type { Author as TAuthor, Post as TPost } from "@prisma/client";
+import Head from "next/head";
 
 interface Props extends TAuthor {
   posts: TPost[];
@@ -58,6 +59,13 @@ const AuthorPage: React.FC<Props> = (author) => {
   if (!author.posts) {
     return (
       <Layout>
+        <Head>
+          <title>{`${author.name} -- ilalang`}</title>
+          <meta
+            name="description"
+            content={`${author.bio}`}
+          />
+        </Head>
         <div className="page">
           <h1>{author.name} has not published any posts yet.</h1>
         </div>
@@ -67,6 +75,13 @@ const AuthorPage: React.FC<Props> = (author) => {
 
   return (
     <Layout>
+        <Head>
+          <title>{`${author.name} -- ilalang`}</title>
+          <meta
+            name="description"
+            content={`${author.bio}`}
+          />
+        </Head>
       <div className="page mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         <div className="author-profile my-8 p-6 bg-white shadow rounded-lg flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-10">
           <img
