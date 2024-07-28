@@ -48,11 +48,7 @@ const Blog: React.FC<Props> = ({ feed, authors }) => {
         <div className="space-y-2 pb-8 pt-6 md:space-y-5">
           <PageTitle>ilalang -- di antara mutiara</PageTitle>
           <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
-            ilalang adalah gulma yang tak diinginkan oleh petani di lahannya,
-            karena daunnya yang tajam menyulitkan orang untuk mengeruk hasil
-            tanah. beberapa orang-orang malang terpaksa menjadi penyintas bagai
-            gulma selama puluhan tahun. situs ini hendak mencatat hasil karya
-            dari sukma para gulma tersebut.
+            Seperti ilalang yang tidak diinginkan petani di ladang mereka, dalam situs ini dihimpun sajak‐sajak dari para "ilalang" dalam semesta sejarah puitika Indonesia. Bukan atas kehendak sendiri, nama dan karya mereka disingkirkan, seluruhnya atas pertimbangan politik ingatan, dibayangi kekerasan negara, yang menjadikan para perangkai kata sebagai <i>pariah</i>, bahkan harus menggelandang puluhan tahun di luar negeri.
           </p>
         </div>
 

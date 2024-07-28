@@ -10,11 +10,17 @@ const Blog: React.FC = (props) => {
         <div className="space-y-2 pb-8 pt-6 md:space-y-5">
           <PageTitle>ilalang -- di antara mutiara</PageTitle>
           <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
-          Ilalang adalah gulma yang tidak diinginkan oleh petani di lahan mereka, karena daunnya yang tajam menyulitkan orang untuk mengolah tanah. Beberapa orang malang terpaksa menjadi penyintas seperti gulma selama puluhan tahun. 
+          Seperti ilalang yang tidak diinginkan petani di ladang mereka, dalam situs ini dihimpun sajak‐sajak dari para "ilalang" dalam semesta sejarah puitika Indonesia. Bukan atas kehendak sendiri, nama dan karya mereka disingkirkan, seluruhnya atas pertimbangan politik ingatan, dibayangi kekerasan negara, yang menjadikan para perangkai kata sebagai <i>pariah</i>, bahkan harus menggelandang puluhan tahun di luar negeri.
           <br /><br />
-          Situs ini bertujuan untuk mencatat hasil karya dari jiwa-jiwa para gulma tersebut. Lebih dari itu, situs ini bertujuan untuk mengumpulkan puisi-puisi maupun karya-karya lain dari mereka yang telah dilupakan oleh zaman. Mereka adalah korban dari kekerasan yang dilakukan secara sistematis oleh negara. Dengan kekerasan yang dilembagakan, banyak individu yang kehilangan suara dan hak mereka. 
+          Dalam situs ini tersua beberapa puluh sajak karya *Agam Wispi*, *Sobron Aidit*, dan masih banyak lagi karya penyair Indonesia pada situs ini, yang pada masa puncak kepenyairannya, tergabung sebagai anggota Lembaga Kebudajaan Rakjat (Lekra), organisasi seniman dan seniwati yang berdiri pada 17 Agustus 1950 dan turut dihancurkan dalam pembunuhan massal 1965‐1966. 
           <br /><br />
-          Melalui situs ini, suara mereka yang hilang diharapkan bisa kembali didengar, serta karya-karya mereka bisa mendapatkan tempat yang layak dalam sejarah dan budaya kita.
+          Menjiwai <i>zeitgeist</i> atau semangat zamannya, karya‐karya Agam, Sobron, maupun penyair lainnya pada situs ini mencerminkan pandangan sikap Lekra terhadap penderitaan rakyat banyak, yang tidak mampu membela diri di hadapan kesewenang‐wenangan tuan tanah, tengkulak, dan juragan. Getir nasib mereka melantun dalam getaran jiwa seorang penyair, mengalir dalam untaian kata‐kata, dahulu sebagai karya seni, dan kini sebagai kepingan fragmen sejarah sosial yang coba dihapuskan dengan berbagai cara, yang halal maupun yang lancung.
+          <br /><br />
+          Puisi-puisi maupun karya-karya lain mereka yang sengaja dilupakan adalah bagian dari seluruh rangkaian kekerasan budaya (Herlambang, 2013) yang secara sistematis dikerjakan oleh negara Orde Baru. Dengan jalan yang sama pula, maka penderitaan kaum tani miskin dan nelayan papa, yang dirampas tanahnya dan dimiskinkan hidupnya, tidak lagi dimuliakan dalam karya seni, tetapi dibuang bagai tebu habis sepah.
+          <br /><br />
+          Melalui situs ini, kiranya karya‐karya Agam, Sobron, dan mereka disini bisa kembali didengar dan diingat, secara khusus oleh Generasi Z yang terputus secara spiritual dari gelora zaman tatkala para penyair Lekra itu memublikasikan karya mereka di lembar kebudayaan surat kabar <i>Harian Rakjat</i>, organ resmi Partai Komunis Indonesia. 
+          <br /><br />
+          Usaha kecil mengabadikan ingatan tentang karya-karya sastra pengungkap kebenaran, sehingga yang dilupakan, kini mendapatkan tempat yang mulia dan terhormat, dalam sejarah kebudayaan bangsa Indonesia.
           </p>
         </div>
 
