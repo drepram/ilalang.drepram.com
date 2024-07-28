@@ -2,10 +2,18 @@ import React from "react";
 import Layout from "../components/Layout";
 import PageTitle from "../components/PageTitle";
 import SectionContainer from "../components/SectionContainer";
+import Head from "next/head";
 
 const Blog: React.FC = (props) => {
   return (
     <Layout>
+      <Head>
+        <title>{`ilalang -- di antara mutiara`}</title>
+        <meta
+          name="description"
+          content={`Repositori Karya Para Ilalang`}
+        />
+      </Head>
       <SectionContainer>
         <div className="space-y-2 pb-8 pt-6 md:space-y-5">
           <PageTitle>ilalang -- di antara mutiara</PageTitle>
