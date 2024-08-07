@@ -97,7 +97,7 @@ const AuthorPage: React.FC<Props> = (author) => {
               {author.yearOfLife}
             </h5>
             <hr className="w-full sm:w-auto my-2" />
-            <p className="text-gray-600 dark:text-gray-400 mt-4">
+            <p className="text-gray-600 dark:text-gray-400 mt-4 text-sm">
               {author.bio}
             </p>
           </div>

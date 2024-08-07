@@ -9,6 +9,7 @@ type Author = {
   profilePicture: string;
   yearOfLife: string;
   bio: string;
+  description: string;
 };
 
 const EditAuthor: React.FC = () => {
@@ -19,6 +20,7 @@ const EditAuthor: React.FC = () => {
   const [profilePicture, setProfilePicture] = useState("");
   const [yearOfLife, setYearOfLife] = useState("");
   const [bio, setBio] = useState("");
+  const [description, setDescription] = useState("");
 
   useEffect(() => {
     if (status === "loading") {
@@ -48,6 +50,7 @@ const EditAuthor: React.FC = () => {
           setProfilePicture(data.profilePicture || "");
           setYearOfLife(data.yearOfLife || "");
           setBio(data.bio || "");
+          setDescription(data.description || "");
         });
     }
   }, [selectedAuthor]);
@@ -55,7 +58,7 @@ const EditAuthor: React.FC = () => {
   const submitData = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     try {
-      const body = { name, profilePicture, yearOfLife, bio };
+      const body = { name, profilePicture, yearOfLife, bio, description };
       await fetch(`${process.env.NEXT_PUBLIC_API_PATH}/api/author/${selectedAuthor}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
@@ -145,6 +148,15 @@ const EditAuthor: React.FC = () => {
               placeholder="Bio"
               rows={4}
               value={bio}
+              className="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+            />
+          </div>
+          <div className="mb-4">
+            <input
+              onChange={(e) => setDescription(e.target.value)}
+              placeholder="Description"
+              type="text"
+              value={description}
               className="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
             />
           </div>

@@ -19,7 +19,7 @@ export default async function handle(req, res) {
     if (!session) {
       return res.status(401).json({ error: "Unauthorized" });
     }
-    const { name, profilePicture, yearOfLife, bio } = req.body;
+    const { name, profilePicture, yearOfLife, bio, description } = req.body;
 
     if (!name) {
       return res.status(400).json({ error: "Name is required" });
@@ -32,6 +32,7 @@ export default async function handle(req, res) {
           profilePicture,
           yearOfLife,
           bio,
+          description
         },
       });
       res.json(result);

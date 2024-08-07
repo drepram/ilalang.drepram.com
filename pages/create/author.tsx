@@ -9,6 +9,7 @@ const CreateAuthor: React.FC = () => {
   const [profilePicture, setProfilePicture] = useState("");
   const [yearOfLife, setYearOfLife] = useState("");
   const [bio, setBio] = useState("");
+  const [description, setDescription] = useState("");
 
   useEffect(() => {
     if (status === "loading") {
@@ -22,7 +23,7 @@ const CreateAuthor: React.FC = () => {
   const submitData = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     try {
-      const body = { name, profilePicture, yearOfLife, bio };
+      const body = { name, profilePicture, yearOfLife, bio, description };
       const apiUrl = process.env.NEXT_PUBLIC_API_PATH || 'http://localhost:3000';
       const method = "POST";
 
@@ -84,6 +85,16 @@ const CreateAuthor: React.FC = () => {
               placeholder="Bio"
               rows={4}
               value={bio}
+              className="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block text-gray-700">Description</label>
+            <input
+              onChange={(e) => setDescription(e.target.value)}
+              placeholder="Description"
+              type="text"
+              value={description}
               className="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
             />
           </div>

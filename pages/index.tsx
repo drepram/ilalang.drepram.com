@@ -72,7 +72,7 @@ const Blog: React.FC<Props> = ({ feed, authors }) => {
                 <Card
                   key={author.id}
                   title={author.name}
-                  description={author.bio || "No bio available"}
+                  description={author.description || "No description available"}
                   imgSrc={author.profilePicture || "/default-profile.png"}
                   href={`/a/${author.id}`}
                 />

@@ -7,6 +7,7 @@ export type AuthorProps = {
   profilePicture: string | null;
   yearOfLife: string | null;
   bio: string | null;
+  description: string | null;
   posts:
     | {
         id: string;

@@ -11,7 +11,7 @@ export default async function handle(req, res) {
     if (!session) {
       return res.status(401).json({ error: "Unauthorized" });
     }
-    const { name, profilePicture, yearOfLife, bio } = req.body;
+    const { name, profilePicture, yearOfLife, bio, description } = req.body;
     try {
       const result = await prisma.author.update({
         where: { id: authorId },
@@ -20,6 +20,7 @@ export default async function handle(req, res) {
           profilePicture,
           yearOfLife,
           bio,
+          description
         },
       });
       res.json(result);
