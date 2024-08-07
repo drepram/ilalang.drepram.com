@@ -21,7 +21,7 @@ export default function Footer() {
           <div>{`${new Date().getFullYear()}`}</div>
           <div>{` • `}</div>
           <Link legacyBehavior href="/tentang">
-            <a className="text-cyan-500">tentang</a>
+            <a className="text-fuchsia-500 hover:underline">tentang</a>
           </Link>
         </div>
         <div className="mb-8 text-sm text-gray-500 dark:text-gray-400"></div>
