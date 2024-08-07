@@ -30,6 +30,10 @@ const Blog: React.FC = (props) => {
           <br /><br />
           Usaha kecil mengabadikan ingatan tentang karya-karya sastra pengungkap kebenaran, sehingga yang dilupakan, kini mendapatkan tempat yang mulia dan terhormat, dalam sejarah kebudayaan bangsa Indonesia.
           <br /><br />
+          Gambar pada situs ini dihimpun dari <strong>Dokumenter Yayasan Lontar, Inside Indonesia</strong>, serta beberapa situs seperti: <a href="https://sejarahsosial.org">https://sejarahsosial.org</a>, <a href="https://tribunal1965.org">https://tribunal1965.org</a>, dan <a href="https://budidayak.blogspot.com/">https://budidayak.blogspot.com/</a>. 
+          <br/><br/>
+          Untuk penulisan profil para penulis dibantu oleh saudara <a href="https://twitter.com/ChrisWibisana">Chris Wibisana</a> dan untuk perancangan, pembangunan, serta penghimpunan konten dari situs ini dikerjakan oleh saya sendiri.
+          <br /><br />
           Kontak <a href="https://twitter.com/drepram">saya</a> di Twitter jika ada tulisan disini yang tidak benar pengetikannya ataupun juga masukan lainnya. Selamat membaca.
           </p>
         </div>
