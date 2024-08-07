@@ -28,6 +28,7 @@ model Author {
   profilePicture   String?
   yearOfLife      String?
   bio             String?
+  description     String?
   posts           Post[]
 }
 

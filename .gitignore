@@ -1,3 +1,4 @@
+verceldb_dump.sql
 migrations/
 node_modules/
 .next/
