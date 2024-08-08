@@ -74,6 +74,15 @@ const Post: React.FC<Props> = (props) => {
           name="description"
           content={`Baca "${title}" karya ${props.author.name} di ilalang`}
         />
+        <meta property="og:title" content={`${title} [${props.author.name}] -- ilalang`} />
+        <meta property="og:description" content={`Baca "${title}" karya ${props.author.name} di ilalang`} />
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content={`https://ilalang.drepram.com/p/${props.id}`} />
+        <meta property="og:image" content={`${props.author.profilePicture}`} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={`${title} [${props.author.name}] -- ilalang`} />
+        <meta name="twitter:description" content={`Baca "${title}" karya ${props.author.name} di ilalang`} />
+        <meta name="twitter:image" content={`${props.author.profilePicture}`} />
       </Head>
       <section className="max-w-screen-sm mx-auto px-4">
         <article className="mx-auto max-w-full px-4">
