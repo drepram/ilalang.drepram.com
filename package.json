@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "dev": "next",
-    "build": "next build",
+    "build": "next build && next-sitemap",
     "start": "next start",
     "postinstall": "prisma generate"
   },
@@ -16,6 +16,7 @@
     "@prisma/client": "^5.17.0",
     "next": "^13.0.0",
     "next-auth": "^4.24.7",
+    "next-sitemap": "^4.2.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-markdown": "8.0.0",
