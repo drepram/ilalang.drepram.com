@@ -1,5 +1,3 @@
-const fetch = require('node-fetch');
-
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
   siteUrl: 'https://ilalang.drepram.com',
@@ -11,12 +9,10 @@ module.exports = {
   outDir: './public',
   // Default transform function
   transform: async (config, path) => {
-    // Exclude API routes and non-page routes
     if (path.includes('/api/') || path.includes('/create/') || path.includes('/edit/')) {
       return null;
     }
 
-    // Default transformation for static pages
     return {
       loc: path,
       changefreq: 'daily',
@@ -27,6 +23,9 @@ module.exports = {
   // Additional paths for dynamic routes
   additionalPaths: async (config) => {
     const paths = [];
+    
+    // Dynamic import of node-fetch
+    const fetch = await import('node-fetch').then(mod => mod.default);
 
     // Fetch dynamic post IDs
     const posts = await fetch('https://ilalang.drepram.com/api/post').then(res => res.json());
