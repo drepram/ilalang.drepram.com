@@ -54,10 +54,7 @@ async function modifyPost(): Promise<void> {
 }
 
 const Post: React.FC<Props> = (props) => {
-  const { data: session, status } = useSession();
-  if (status === "loading") {
-    return <div>Authenticating ...</div>;
-  }
+  const { data: session } = useSession();
   const userHasValidSession = Boolean(session);
   const postBelongsToUser = session?.user?.id === props.userId;
   let title = props.title;
