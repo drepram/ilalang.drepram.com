@@ -68,11 +68,11 @@ const Post: React.FC<Props> = (props) => {
         <meta property="og:description" content={`Baca "${props.title}" di ilalang`} />
         <meta property="og:type" content="article" />
         <meta property="og:url" content={`https://ilalang.drepram.com/p/${props.id}`} />
-        <meta property="og:image" content={`${props.author.profilePicture}`} />
+        {/* <meta property="og:image" content={`${props.profilePicture}`} /> */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={`${props.title} -- ilalang`} />
         <meta name="twitter:description" content={`Baca "${props.title}" di ilalang`} />
-        <meta name="twitter:image" content={`${props.author.profilePicture}`} />
+        {/* <meta name="twitter:image" content={`${props.profilePicture}`} /> */}
       </Head>
         <div>Memuat...</div>
       </Layout>
