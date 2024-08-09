@@ -55,9 +55,29 @@ async function modifyPost(): Promise<void> {
 
 const Post: React.FC<Props> = (props) => {
   const { data: session, status } = useSession();
-  // if (status === "loading") {
-  //   return <div>Memuat...</div>;
-  // }
+  if (status === "loading") {
+    return (
+      <Layout showFooter={false}>
+        <Head>
+        <title>{`${props.title} [${props.author.name}] -- ilalang`}</title>
+        <meta
+          name="description"
+          content={`Baca "${props.title}" karya ${props.author.name} di ilalang`}
+        />
+        <meta property="og:title" content={`${props.title} [${props.author.name}] -- ilalang`} />
+        <meta property="og:description" content={`Baca "${props.title}" karya ${props.author.name} di ilalang`} />
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content={`https://ilalang.drepram.com/p/${props.id}`} />
+        <meta property="og:image" content={`${props.author.profilePicture}`} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={`${props.title} [${props.author.name}] -- ilalang`} />
+        <meta name="twitter:description" content={`Baca "${props.title}" karya ${props.author.name} di ilalang`} />
+        <meta name="twitter:image" content={`${props.author.profilePicture}`} />
+      </Head>
+        <div>Memuat...</div>
+      </Layout>
+    );
+  }
   const userHasValidSession = Boolean(session);
   const postBelongsToUser = session?.user?.id === props.userId;
   let title = props.title;
