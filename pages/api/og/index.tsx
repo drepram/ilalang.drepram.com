@@ -47,7 +47,7 @@ export default async function handler(req: NextRequest, res: NextResponse) {
         style={{
           fontSize: 40,
           color: "black",
-          background: "rgba(0, 0, 0, 0.05)",
+          background: "#2596be",
           width: "100%",
           height: "100%",
           display: "flex",
@@ -79,7 +79,7 @@ export default async function handler(req: NextRequest, res: NextResponse) {
             display: "flex",
             position: "absolute",
             top: 72,
-            left: 72,
+            left: 128,
             background: "rgba(0, 0, 0, 0.5)",
             borderRadius: 8,
             color: "white",
@@ -93,7 +93,7 @@ export default async function handler(req: NextRequest, res: NextResponse) {
             display: "flex",
             flexDirection: "column",
             gap: "24px",
-            padding: "72px",
+            padding: "72px 128px",
           }}
         >
           <div style={{ display: "flex" }}>
