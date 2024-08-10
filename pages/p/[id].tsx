@@ -61,7 +61,7 @@ const Post: React.FC<Props> = ({ author, ...props }) => {
         <Meta
           title={props.title}
           description={`Baca "${props.title}" di ilalang`}
-          image={author.profilePicture}
+          image={author?.profilePicture}
           ogType={OGType.Article}
           url={`/p/${props.id}`}
         />
@@ -82,7 +82,7 @@ const Post: React.FC<Props> = ({ author, ...props }) => {
       <Meta
         title={props.title}
         description={`Baca "${props.title}" di ilalang`}
-        image={author.profilePicture}
+        image={author?.profilePicture}
         ogType={OGType.Article}
         url={`/p/${props.id}`}
       />

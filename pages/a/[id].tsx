@@ -77,7 +77,7 @@ const AuthorPage: React.FC<Props> = (author) => {
     <Layout>
       <Meta
         title={author.name}
-        description={author.bio}
+        description={author.description}
         image={author.profilePicture}
         ogType={OGType.Profile}
         url={`/a/${author.id}`}
