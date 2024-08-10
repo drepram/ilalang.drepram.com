@@ -4,7 +4,7 @@ import Layout from "../../components/Layout";
 import Post from "../../components/Post";
 import prisma from "../../lib/prisma";
 import type { Author as TAuthor, Post as TPost } from "@prisma/client";
-import Head from "next/head";
+import Meta, { OGType } from "../../components/Meta";
 
 interface Props extends TAuthor {
   posts: TPost[];
@@ -59,23 +59,13 @@ const AuthorPage: React.FC<Props> = (author) => {
   if (!author.posts) {
     return (
       <Layout>
-        <Head>
-          <title>{`${author.name} -- ilalang`}</title>
-          <meta
-            name="description"
-            content={`${author.bio}`}
-          />
-          <meta property="og:title" content={`${author.name} -- ilalang`} />
-          <meta property="og:description" content={`${author.bio}`} />
-          <meta property="og:type" content="profile" />
-          <meta property="og:url" content={`https://ilalang.drepram.com/a/${author.id}`} />
-          <meta property="og:image" content={author.profilePicture} />
-          <meta property="og:locale" content="en_US" />
-          <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:title" content={`${author.name} -- ilalang`} />
-          <meta name="twitter:description" content={`${author.bio}`} />
-          <meta name="twitter:image" content={`https://ilalang.drepram.com${author.profilePicture}`} />
-        </Head>
+        <Meta
+          title={author.name}
+          description={author.bio}
+          image={author.profilePicture}
+          ogType={OGType.Profile}
+          url={`/a/${author.id}`}
+        />
         <div className="page">
           <h1>Penulis ini belum dimuat karyanya.</h1>
         </div>
@@ -85,23 +75,13 @@ const AuthorPage: React.FC<Props> = (author) => {
 
   return (
     <Layout>
-        <Head>
-          <title>{`${author.name} -- ilalang`}</title>
-          <meta
-            name="description"
-            content={`${author.bio}`}
-          />
-          <meta property="og:title" content={`${author.name} -- ilalang`} />
-          <meta property="og:description" content={`${author.bio}`} />
-          <meta property="og:type" content="profile" />
-          <meta property="og:url" content={`https://ilalang.drepram.com/a/${author.id}`} />
-          <meta property="og:image" content={author.profilePicture} />
-          <meta property="og:locale" content="en_US" />
-          <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:title" content={`${author.name} -- ilalang`} />
-          <meta name="twitter:description" content={`${author.bio}`} />
-          <meta name="twitter:image" content={`https://ilalang.drepram.com${author.profilePicture}`} />
-        </Head>
+      <Meta
+        title={author.name}
+        description={author.bio}
+        image={author.profilePicture}
+        ogType={OGType.Profile}
+        url={`/a/${author.id}`}
+      />
       <div className="page mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         <div className="author-profile my-8 p-6 bg-white shadow rounded-lg flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-10">
           <img
