@@ -8,8 +8,8 @@ import Layout from "../../components/Layout";
 import prisma from "../../lib/prisma";
 import PageTitle from "../../components/PageTitle";
 import Link from "next/link";
-import Head from "next/head";
 import { Post as TPost, Author as TAuthor } from "@prisma/client";
+import Meta, { OGType } from "../../components/Meta";
 
 interface Props extends TPost {
   author: TAuthor;
@@ -53,27 +53,18 @@ async function modifyPost(): Promise<void> {
   Router.push("/edit/post");
 }
 
-const Post: React.FC<Props> = (props) => {
+const Post: React.FC<Props> = ({ author, ...props }) => {
   const { data: session, status } = useSession();
   if (status === "loading") {
     return (
       <Layout showFooter={false}>
-        <Head>
-        <title>{`${props.title} -- ilalang`}</title>
-        <meta
-          name="description"
-          content={`Baca "${props.title}" di ilalang`}
+        <Meta
+          title={props.title}
+          description={`Baca "${props.title}" di ilalang`}
+          image={author.profilePicture}
+          ogType={OGType.Article}
+          url={`/p/${props.id}`}
         />
-        <meta property="og:title" content={`${props.title} -- ilalang`} />
-        <meta property="og:description" content={`Baca "${props.title}" di ilalang`} />
-        <meta property="og:type" content="article" />
-        <meta property="og:url" content={`https://ilalang.drepram.com/p/${props.id}`} />
-        {/* <meta property="og:image" content={`${props.profilePicture}`} /> */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={`${props.title} -- ilalang`} />
-        <meta name="twitter:description" content={`Baca "${props.title}" di ilalang`} />
-        {/* <meta name="twitter:image" content={`${props.profilePicture}`} /> */}
-      </Head>
         <div>Memuat...</div>
       </Layout>
     );
@@ -81,29 +72,20 @@ const Post: React.FC<Props> = (props) => {
   const userHasValidSession = Boolean(session);
   const postBelongsToUser = session?.user?.id === props.userId;
   let title = props.title;
-  let authorUrl = `/a/${props.author.id}`;
+  let authorUrl = `/a/${author.id}`;
   if (!props.published) {
     title = `${title} (Draft)`;
   }
 
   return (
     <Layout showFooter={false}>
-      <Head>
-        <title>{`${title} [${props.author.name}] -- ilalang`}</title>
-        <meta
-          name="description"
-          content={`Baca "${title}" karya ${props.author.name} di ilalang`}
-        />
-        <meta property="og:title" content={`${title} [${props.author.name}] -- ilalang`} />
-        <meta property="og:description" content={`Baca "${title}" karya ${props.author.name} di ilalang.`} />
-        <meta property="og:type" content="article" />
-        <meta property="og:url" content={`https://ilalang.drepram.com/p/${props.id}`} />
-        <meta property="og:image" content={`${props.author.profilePicture}`} />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={`${title} [${props.author.name}] -- ilalang`} />
-        <meta name="twitter:description" content={`Baca "${title}" karya ${props.author.name} di ilalang.`} />
-        <meta name="twitter:image" content={`https://ilalang.drepram.com${props.author.profilePicture}`} />
-      </Head>
+      <Meta
+        title={props.title}
+        description={`Baca "${props.title}" di ilalang`}
+        image={author.profilePicture}
+        ogType={OGType.Article}
+        url={`/p/${props.id}`}
+      />
       <section className="max-w-screen-sm mx-auto px-4">
         <article className="mx-auto max-w-full px-4">
           <header>
@@ -112,7 +94,7 @@ const Post: React.FC<Props> = (props) => {
                 <h1 className="text-sm mb-10">
                   <Link legacyBehavior href={authorUrl}>
                     <span className="text-fuchsia-500 hover:underline">
-                      &larr; {props.author.name}
+                      &larr; {author.name}
                     </span>
                   </Link>
                 </h1>
