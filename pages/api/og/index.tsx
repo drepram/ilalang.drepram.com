@@ -47,7 +47,7 @@ export default async function handler(req: NextRequest, res: NextResponse) {
         style={{
           fontSize: 40,
           color: "black",
-          background: "#2596be",
+          background: "#f2f2f2",
           width: "100%",
           height: "100%",
           display: "flex",
