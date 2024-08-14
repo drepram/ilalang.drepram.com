@@ -23,6 +23,13 @@ export const authOptions = {
   },
 };
 
-const authHandler: NextApiHandler = (req, res) =>
-  NextAuth(req, res, authOptions);
+const authHandler: NextApiHandler = (req, res) => {
+  if (req.url === "/api/auth/signin" && process.env.NODE_ENV === "production") {
+    res.statusCode = 404;
+    res.json("୭₊˚🎀 ilalang ✿ ·˚ ₊");
+  }
+  const handler = NextAuth(req, res, authOptions);
+  return handler;
+};
+
 export default authHandler;
