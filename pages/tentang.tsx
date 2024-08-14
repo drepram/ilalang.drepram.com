@@ -32,9 +32,9 @@ const Blog: React.FC = (props) => {
           <br /><br />
           Gambar pada situs ini dihimpun dari <strong>Dokumenter Yayasan Lontar, Inside Indonesia</strong>, serta beberapa situs seperti: <a className="text-fuchsia-500 hover:underline" href="https://sejarahsosial.org">sejarahsosial.org</a>, <a className="text-fuchsia-500 hover:underline" href="https://tribunal1965.org">tribunal1965.org</a>, dan <a className="text-fuchsia-500 hover:underline" href="https://budidayak.blogspot.com/">budidayak.blogspot.com</a>. 
           <br/><br/>
-          Untuk penulisan profil para penulis dibantu oleh saudara <a className="text-fuchsia-500 hover:underline" href="https://twitter.com/ChrisWibisana">Chris Wibisana</a> dan untuk perancangan, pembangunan, serta penghimpunan konten dari situs ini dikerjakan oleh saya sendiri.
-          <br /><br />
-          Kontak <a className="text-fuchsia-500 hover:underline" href="https://twitter.com/drepram">saya</a> di Twitter jika ada tulisan disini yang tidak benar pengetikannya ataupun juga masukan lainnya. Selamat membaca.
+          Untuk penulisan profil para penulis dibantu oleh saudara <a className="text-fuchsia-500 hover:underline" href="https://twitter.com/ChrisWibisana">Chris Wibisana</a> dan untuk optimalisasi kecepatan situs dibantu juga oleh kawan <a className="text-fuchsia-500 hover:underline" href="https://github.com/wutsqo">Wutsqo</a>.
+          <br/><br/>
+          Perancangan, pembangunan, serta penghimpunan konten dari situs ini dikerjakan oleh saya sendiri. Kontak <a className="text-fuchsia-500 hover:underline" href="https://twitter.com/drepram">saya</a> di Twitter jika ada tulisan disini yang tidak benar pengetikannya ataupun juga masukan lainnya. Selamat membaca.
           </p>
         </div>
 
