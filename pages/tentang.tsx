@@ -18,8 +18,9 @@ const Blog: React.FC = (props) => {
       <SectionContainer>
         <div className="space-y-2 pb-8 pt-6 md:space-y-5">
           <PageTitle>ilalang -- di antara mutiara</PageTitle>
-          <img src="/assets/logo.png" className="object-contain w-10 h-10"/>
-          <br/><br/>
+          <div align="center">
+          <img src="/assets/logo.png" className="object-contain w-28 h-28"/>      
+          </div>
           <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
           Gambar diatas menggambarkan mutiara, tetapi oleh orang lain dianggap ilalang. Dipaksa menguncup, tidak mekar berkembang.
           <br/><br/>
