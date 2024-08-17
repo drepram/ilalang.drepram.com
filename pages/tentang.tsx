@@ -18,7 +18,7 @@ const Blog: React.FC = (props) => {
       <SectionContainer>
         <div className="space-y-2 pb-8 pt-6 md:space-y-5">
           <PageTitle>ilalang -- di antara mutiara</PageTitle>
-          <div align="center">
+          <div class="h-screen flex items-center">">
           <img src="/assets/logo.png" className="object-contain w-28 h-28"/>      
           </div>
           <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
