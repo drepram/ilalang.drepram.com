@@ -46,6 +46,7 @@ const Blog: React.FC<Props> = ({ feed, authors }) => {
   return (
     <Layout>
       <Head>
+        <link rel="shortcut icon" href="/assets/favicon.ico" />
         <title>{`ilalang -- di antara mutiara`}</title>
         <meta
           name="description"

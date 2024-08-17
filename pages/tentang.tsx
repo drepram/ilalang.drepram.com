@@ -8,6 +8,7 @@ const Blog: React.FC = (props) => {
   return (
     <Layout>
       <Head>
+        <link rel="shortcut icon" href="/assets/favicon.ico" />
         <title>{`ilalang -- di antara mutiara`}</title>
         <meta
           name="description"
@@ -17,7 +18,11 @@ const Blog: React.FC = (props) => {
       <SectionContainer>
         <div className="space-y-2 pb-8 pt-6 md:space-y-5">
           <PageTitle>ilalang -- di antara mutiara</PageTitle>
+          <img src="/assets/logo.png" className="object-contain w-10 h-10"/>
+          <br/><br/>
           <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
+          Gambar diatas menggambarkan mutiara, tetapi oleh orang lain dianggap ilalang. Dipaksa menguncup, tidak mekar berkembang.
+          <br/><br/>
           Seperti ilalang yang tidak diinginkan petani di ladang mereka, dalam situs ini dihimpun sajak‐sajak dari para "ilalang" dalam semesta sejarah puitika Indonesia. Bukan atas kehendak sendiri, nama dan karya mereka disingkirkan, seluruhnya atas pertimbangan politik ingatan, dibayangi kekerasan negara, yang menjadikan para perangkai kata sebagai <i>pariah</i>, bahkan harus menggelandang puluhan tahun di luar negeri.
           <br /><br />
           Dalam situs ini tersua beberapa puluh sajak karya <i>Agam Wispi</i>, <i>Sobron Aidit</i>, dan masih banyak lagi karya penyair Indonesia pada situs ini, yang pada masa puncak kepenyairannya, tergabung sebagai anggota Lembaga Kebudajaan Rakjat (Lekra), organisasi seniman dan seniwati yang berdiri pada 17 Agustus 1950 dan turut dihancurkan dalam pembunuhan massal 1965‐1966. 

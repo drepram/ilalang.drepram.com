@@ -59,6 +59,7 @@ const AuthorPage: React.FC<Props> = (author) => {
   if (!author.posts) {
     return (
       <Layout>
+        <link rel="shortcut icon" href="/assets/favicon.ico" />
         <Meta
           title={author.name}
           description={author.description}
@@ -75,6 +76,7 @@ const AuthorPage: React.FC<Props> = (author) => {
 
   return (
     <Layout>
+      <link rel="shortcut icon" href="/assets/favicon.ico" />
       <Meta
         title={author.name}
         description={author.description}

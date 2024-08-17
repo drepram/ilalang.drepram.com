@@ -58,6 +58,7 @@ const Post: React.FC<Props> = ({ author, ...props }) => {
   if (status === "loading") {
     return (
       <Layout showFooter={false}>
+        <link rel="shortcut icon" href="/assets/favicon.ico" />
         <Meta
           title={props.title}
           description={`Baca "${props.title}" di ilalang`}
@@ -79,6 +80,7 @@ const Post: React.FC<Props> = ({ author, ...props }) => {
 
   return (
     <Layout showFooter={false}>
+      <link rel="shortcut icon" href="/assets/favicon.ico" />
       <Meta
         title={props.title}
         description={`Baca "${props.title}" di ilalang`}
