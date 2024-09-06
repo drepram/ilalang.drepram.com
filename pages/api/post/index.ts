@@ -56,6 +56,7 @@ async function createPost(req, res, session) {
         },
         user: { connect: { id: session.user.id } },
         highlighted: highlighted || false,
+        published: true, // No longer need to use the drafts functionality.
       },
     });
 
