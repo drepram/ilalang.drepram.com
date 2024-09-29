@@ -3,17 +3,26 @@ import Layout from "../components/Layout";
 import PageTitle from "../components/PageTitle";
 import SectionContainer from "../components/SectionContainer";
 import Head from "next/head";
+import Meta, { OGType } from "../components/Meta";
 
 const Blog: React.FC = (props) => {
   return (
     <Layout>
       <Head>
         <link rel="shortcut icon" href="/assets/favicon.ico" />
-        <title>{`ilalang -- di antara mutiara`}</title>
-        <meta
-          name="description"
-          content={`Repositori Karya Para Ilalang`}
-        />
+        <title>{`ilalang -- mengabadikan ingatan`}</title>
+        <meta name="description" content={`Repositori karya para ilalang dari 1946 sampai 1965. Melawan kekerasan negara dengan mengabadikan ingatan mereka yang sengaja dilupakan.`} />
+        <meta property="og:title" content={`ilalang -- mengabadikan ingatan`} />
+        <meta property="og:description" content={`${`Repositori karya para ilalang dari 1946 sampai 1965. Melawan kekerasan negara dengan mengabadikan ingatan mereka yang sengaja dilupakan.`}`} />
+        <meta property="og:type" content={OGType.Profile} />
+        <meta property="og:url" content={`/assets/og.png`} />
+        <meta property="og:image" content={`/assets/og.png`} />
+        <meta property="og:locale" content="en_US" />
+        <meta property="og:site_name" content="ilalang -- mengabadikan ingatan" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={`ilalang -- mengabadikan ingatan`} />
+        <meta name="twitter:description" content={`${`Repositori karya para ilalang dari 1946 sampai 1965. Melawan kekerasan negara dengan mengabadikan ingatan mereka yang sengaja dilupakan.`}`} />
+        <meta name="twitter:image" content={`/assets/og.png`} />
       </Head>
       <SectionContainer>
         <div className="space-y-2 pb-8 pt-6 md:space-y-5">

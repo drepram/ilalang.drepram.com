@@ -34,7 +34,7 @@ const Meta: FC<MetaProps> = ({ title, description, image, ogType, url }) => {
       <meta property="og:url" content={`${SITE_URL}${url}`} />
       <meta property="og:image" content={ogImage} />
       <meta property="og:locale" content="en_US" />
-      <meta property="og:site_name" content="ilalang -- di antara mutiara" />
+      <meta property="og:site_name" content="ilalang -- mengabadikan ingatan" />
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={`${title} -- ilalang`} />
       <meta name="twitter:description" content={`${description}`} />
