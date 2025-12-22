@@ -2,33 +2,47 @@ import React from "react";
 import Layout from "../components/Layout";
 import PageTitle from "../components/PageTitle";
 import SectionContainer from "../components/SectionContainer";
-import Head from "next/head";
-import Meta, { OGType } from "../components/Meta";
+import Meta, { OGType, SITE_URL } from "../components/Meta";
+
+const metaTitle = "ilalang -- di antara mutiara";
+const metaDescription =
+  "Repositori karya para ilalang dari 1946 sampai 1965. Melawan kekerasan negara dengan mengabadikan ingatan mereka yang sengaja dilupakan.";
 
 const Blog: React.FC = (props) => {
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    name: metaTitle,
+    url: `${SITE_URL}/tentang`,
+    description: metaDescription,
+    inLanguage: "id-ID",
+    isPartOf: {
+      "@type": "WebSite",
+      name: "ilalang",
+      url: SITE_URL,
+    },
+  };
+
   return (
     <Layout>
-      <Head>
-        <link rel="shortcut icon" href="/assets/favicon.ico" />
-        <title>{`ilalang -- mengabadikan ingatan`}</title>
-        <meta name="description" content={`Repositori karya para ilalang dari 1946 sampai 1965. Melawan kekerasan negara dengan mengabadikan ingatan mereka yang sengaja dilupakan.`} />
-        <meta property="og:title" content={`ilalang -- mengabadikan ingatan`} />
-        <meta property="og:description" content={`${`Repositori karya para ilalang dari 1946 sampai 1965. Melawan kekerasan negara dengan mengabadikan ingatan mereka yang sengaja dilupakan.`}`} />
-        <meta property="og:type" content={OGType.Profile} />
-        <meta property="og:url" content={`/assets/og.png`} />
-        <meta property="og:image" content={`/assets/og.png`} />
-        <meta property="og:locale" content="en_US" />
-        <meta property="og:site_name" content="ilalang -- mengabadikan ingatan" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={`ilalang -- mengabadikan ingatan`} />
-        <meta name="twitter:description" content={`${`Repositori karya para ilalang dari 1946 sampai 1965. Melawan kekerasan negara dengan mengabadikan ingatan mereka yang sengaja dilupakan.`}`} />
-        <meta name="twitter:image" content={`/assets/og.png`} />
-      </Head>
+      <Meta
+        title={metaTitle}
+        titleSuffix=""
+        description={metaDescription}
+        image="/assets/og.png"
+        ogType={OGType.Website}
+        url="/tentang"
+        structuredData={structuredData}
+      />
       <SectionContainer>
         <div className="space-y-2 pb-8 pt-6 md:space-y-5">
           <PageTitle>ilalang -- di antara mutiara</PageTitle>
           <div className="flex justify-center items-center">
-          <img src="/assets/logo.png" className="object-contain w-28 h-28"/>      
+          <img
+            src="/assets/logo.png"
+            alt="Logo ilalang"
+            className="object-contain w-28 h-28"
+          />
           </div>
           <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
           Gambar diatas menggambarkan mutiara, tetapi oleh orang lain dianggap ilalang. Dipaksa menguncup, tidak mekar berkembang.

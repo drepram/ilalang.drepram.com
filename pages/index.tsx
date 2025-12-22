@@ -7,8 +7,7 @@ import PageTitle from "../components/PageTitle";
 import SectionContainer from "../components/SectionContainer";
 import prisma from "../lib/prisma";
 import { Author as TAuthor, Post as TPost } from "@prisma/client";
-import Head from "next/head";
-import Meta, { OGType } from "../components/Meta";
+import Meta, { OGType, SITE_URL } from "../components/Meta";
 
 export const getStaticProps: GetStaticProps = async () => {
   const feed = await prisma.post
@@ -43,25 +42,31 @@ type Props = {
   authors: TAuthor[];
 };
 
+const metaTitle = "ilalang -- mengabadikan ingatan";
+const metaDescription =
+  "Repositori karya para ilalang dari 1946 sampai 1965. Melawan kekerasan negara dengan mengabadikan ingatan mereka yang sengaja dilupakan.";
+
 const Blog: React.FC<Props> = ({ feed, authors }) => {
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "ilalang",
+    url: SITE_URL,
+    description: metaDescription,
+    inLanguage: "id-ID",
+  };
+
   return (
     <Layout>
-      <Head>
-        <link rel="shortcut icon" href="/assets/favicon.ico" />
-        <title>{`ilalang -- mengabadikan ingatan`}</title>
-        <meta name="description" content={`Repositori karya para ilalang dari 1946 sampai 1965. Melawan kekerasan negara dengan mengabadikan ingatan mereka yang sengaja dilupakan.`} />
-        <meta property="og:title" content={`ilalang -- mengabadikan ingatan`} />
-        <meta property="og:description" content={`${`Repositori karya para ilalang dari 1946 sampai 1965. Melawan kekerasan negara dengan mengabadikan ingatan mereka yang sengaja dilupakan.`}`} />
-        <meta property="og:type" content={OGType.Profile} />
-        <meta property="og:url" content={`/assets/og.png`} />
-        <meta property="og:image" content={`/assets/og.png`} />
-        <meta property="og:locale" content="en_US" />
-        <meta property="og:site_name" content="ilalang -- mengabadikan ingatan" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={`ilalang -- mengabadikan ingatan`} />
-        <meta name="twitter:description" content={`${`Repositori karya para ilalang dari 1946 sampai 1965. Melawan kekerasan negara dengan mengabadikan ingatan mereka yang sengaja dilupakan.`}`} />
-        <meta name="twitter:image" content={`/assets/og.png`} />
-      </Head>
+      <Meta
+        title={metaTitle}
+        titleSuffix=""
+        description={metaDescription}
+        image="/assets/og.png"
+        ogType={OGType.Website}
+        url="/"
+        structuredData={structuredData}
+      />
       <SectionContainer>
         <div className="space-y-2 pb-8 pt-6 md:space-y-5">
           <PageTitle>ilalang -- mengabadikan ingatan</PageTitle>

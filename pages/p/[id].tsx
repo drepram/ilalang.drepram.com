@@ -9,7 +9,7 @@ import prisma from "../../lib/prisma";
 import PageTitle from "../../components/PageTitle";
 import Link from "next/link";
 import { Post as TPost, Author as TAuthor } from "@prisma/client";
-import Meta, { OGType } from "../../components/Meta";
+import Meta, { OGType, SITE_URL } from "../../components/Meta";
 
 interface Props extends TPost {
   author: TAuthor;
@@ -55,16 +55,40 @@ async function modifyPost(): Promise<void> {
 
 const Post: React.FC<Props> = ({ author, ...props }) => {
   const { data: session, status } = useSession();
+  const description = `Baca "${props.title}" di ilalang`;
+  const image = author?.profilePicture || "/assets/og.png";
+  const structuredData = author
+    ? {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        headline: props.title,
+        description,
+        image: `${SITE_URL}${image}`,
+        author: {
+          "@type": "Person",
+          name: author.name,
+        },
+        datePublished: props.createdAt,
+        dateModified: props.createdAt,
+        mainEntityOfPage: `${SITE_URL}/p/${props.id}`,
+        publisher: {
+          "@type": "Organization",
+          name: "ilalang",
+          url: SITE_URL,
+        },
+      }
+    : undefined;
+
   if (status === "loading") {
     return (
       <Layout showFooter={false}>
-        <link rel="shortcut icon" href="/assets/favicon.ico" />
         <Meta
           title={props.title}
-          description={`Baca "${props.title}" di ilalang`}
-          image={author?.profilePicture}
+          description={description}
+          image={image}
           ogType={OGType.Article}
           url={`/p/${props.id}`}
+          structuredData={structuredData}
         />
         <div>Memuat...</div>
       </Layout>
@@ -80,13 +104,13 @@ const Post: React.FC<Props> = ({ author, ...props }) => {
 
   return (
     <Layout showFooter={false}>
-      <link rel="shortcut icon" href="/assets/favicon.ico" />
       <Meta
         title={props.title}
-        description={`Baca "${props.title}" di ilalang`}
-        image={author?.profilePicture}
+        description={description}
+        image={image}
         ogType={OGType.Article}
         url={`/p/${props.id}`}
+        structuredData={structuredData}
       />
       <section className="max-w-screen-sm mx-auto px-4">
         <article className="mx-auto max-w-full px-4">

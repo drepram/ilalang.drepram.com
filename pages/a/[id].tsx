@@ -4,7 +4,7 @@ import Layout from "../../components/Layout";
 import Post from "../../components/Post";
 import prisma from "../../lib/prisma";
 import type { Author as TAuthor, Post as TPost } from "@prisma/client";
-import Meta, { OGType } from "../../components/Meta";
+import Meta, { OGType, SITE_URL } from "../../components/Meta";
 
 interface Props extends TAuthor {
   posts: TPost[];
@@ -56,16 +56,32 @@ export const getStaticProps = (async (context) => {
 }) satisfies GetStaticProps<Props>;
 
 const AuthorPage: React.FC<Props> = (author) => {
+  const description =
+    author.description || author.bio || "Profil penulis di ilalang.";
+  const image = author.profilePicture || "/assets/og.png";
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    url: `${SITE_URL}/a/${author.id}`,
+    mainEntity: {
+      "@type": "Person",
+      name: author.name,
+      description,
+      image: `${SITE_URL}${image}`,
+    },
+    inLanguage: "id-ID",
+  };
+
   if (!author.posts) {
     return (
       <Layout>
-        <link rel="shortcut icon" href="/assets/favicon.ico" />
         <Meta
           title={author.name}
-          description={author.description}
-          image={author.profilePicture}
+          description={description}
+          image={image}
           ogType={OGType.Profile}
           url={`/a/${author.id}`}
+          structuredData={structuredData}
         />
         <div className="page">
           <h1>Penulis ini belum dimuat karyanya.</h1>
@@ -76,13 +92,13 @@ const AuthorPage: React.FC<Props> = (author) => {
 
   return (
     <Layout>
-      <link rel="shortcut icon" href="/assets/favicon.ico" />
       <Meta
         title={author.name}
-        description={author.description}
-        image={author.profilePicture}
+        description={description}
+        image={image}
         ogType={OGType.Profile}
         url={`/a/${author.id}`}
+        structuredData={structuredData}
       />
       <div className="page mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         <div className="author-profile my-8 p-6 bg-white shadow rounded-lg flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-10">

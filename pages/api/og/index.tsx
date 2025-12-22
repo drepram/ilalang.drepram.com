@@ -34,6 +34,12 @@ export default async function handler(req: NextRequest, res: NextResponse) {
   const image = searchParams.get("image");
   const title = searchParams.get("title");
   const description = searchParams.get("description");
+  const defaultImage = `${SITE_URL}/assets/og.png`;
+  const resolvedImage = image
+    ? image.startsWith("http://") || image.startsWith("https://")
+      ? image
+      : `${SITE_URL}${image}`
+    : defaultImage;
 
   const fontTexts = ["Baca di ilalang.drepram.com", title, description];
   const fontData = await loadGoogleFont(
@@ -65,7 +71,7 @@ export default async function handler(req: NextRequest, res: NextResponse) {
           }}
         >
           <img
-            src={`${SITE_URL}${image}`}
+            src={resolvedImage}
             alt=""
             style={{
               width: "100%",
