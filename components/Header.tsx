@@ -36,6 +36,9 @@ const Header = () => {
             >
               Draft
             </Link>
+            <Link href="/current/stats" className="btn-secondary text-sm">
+              Current Stats
+            </Link>
             <Link href="/create/post" className="btn-secondary text-sm">
               Tulis
             </Link>
