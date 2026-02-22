@@ -94,17 +94,17 @@ const EditAuthor: React.FC = () => {
 
   return (
     <Layout>
-      <div className="page flex items-center justify-center bg-gray-100">
+      <div className="page flex items-center justify-center py-6">
         <form
           onSubmit={submitData}
-          className="w-full max-w-lg bg-white rounded-lg shadow-md p-8"
+          className="form-shell w-full max-w-lg p-8"
         >
-          <h1 className="text-2xl font-bold mb-6">Edit Author</h1>
+          <h1 className="mb-6 text-2xl font-bold text-[#2f241c]">Edit Author</h1>
           <div className="mb-4">
             <select
               value={selectedAuthor}
               onChange={(e) => setSelectedAuthor(e.target.value)}
-              className="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              className="field-select"
             >
               <option value="">Select an author</option>
               {authors.map((author) => (
@@ -121,7 +121,7 @@ const EditAuthor: React.FC = () => {
               type="text"
               value={name}
               required
-              className="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              className="field-input"
             />
           </div>
           <div className="mb-4">
@@ -130,7 +130,7 @@ const EditAuthor: React.FC = () => {
               placeholder="Profile Picture URL"
               type="text"
               value={profilePicture}
-              className="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              className="field-input"
             />
           </div>
           <div className="mb-4">
@@ -139,7 +139,7 @@ const EditAuthor: React.FC = () => {
               placeholder="Year of Life"
               type="text"
               value={yearOfLife}
-              className="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              className="field-input"
             />
           </div>
           <div className="mb-4">
@@ -148,7 +148,7 @@ const EditAuthor: React.FC = () => {
               placeholder="Bio"
               rows={4}
               value={bio}
-              className="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              className="field-textarea"
             />
           </div>
           <div className="mb-4">
@@ -157,7 +157,7 @@ const EditAuthor: React.FC = () => {
               placeholder="Description"
               type="text"
               value={description}
-              className="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              className="field-input"
             />
           </div>
           <div className="flex items-center justify-between">
@@ -165,19 +165,19 @@ const EditAuthor: React.FC = () => {
               disabled={!name || !selectedAuthor}
               type="submit"
               value="Update"
-              className="bg-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline hover:bg-blue-700 disabled:opacity-50"
+              className="btn-primary"
             />
             <button
               type="button"
               onClick={deleteAuthor}
               disabled={!selectedAuthor}
-              className="ml-4 bg-red-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline hover:bg-red-700 disabled:opacity-50"
+              className="btn-danger ml-4"
             >
               Delete
             </button>
           </div>
           <button
-            className="mt-4 text-gray-700 hover:text-gray-900"
+            className="btn-secondary mt-4"
             onClick={() => Router.push("/")}
           >
             Cancel

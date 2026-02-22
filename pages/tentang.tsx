@@ -2,17 +2,21 @@ import React from "react";
 import Layout from "../components/Layout";
 import PageTitle from "../components/PageTitle";
 import SectionContainer from "../components/SectionContainer";
-import Meta, { OGType, SITE_URL } from "../components/Meta";
+import Meta, {
+  OGType,
+  SITE_TITLE,
+  SITE_URL,
+} from "../components/Meta";
 
-const metaTitle = "ilalang -- di antara mutiara";
+const metaTitle = `tentang ${SITE_TITLE} -- di antara mutiara`;
 const metaDescription =
-  "Repositori karya para ilalang dari 1946 sampai 1965. Melawan kekerasan negara dengan mengabadikan ingatan mereka yang sengaja dilupakan.";
+  "Latar belakang ilalang: arsip karya sastra yang melawan kekerasan budaya dan politik ingatan melalui penghimpunan karya yang sengaja disisihkan.";
 
 const Blog: React.FC = (props) => {
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "AboutPage",
-    name: metaTitle,
+    name: SITE_TITLE,
     url: `${SITE_URL}/tentang`,
     description: metaDescription,
     inLanguage: "id-ID",
@@ -35,16 +39,18 @@ const Blog: React.FC = (props) => {
         structuredData={structuredData}
       />
       <SectionContainer>
-        <div className="space-y-2 pb-8 pt-6 md:space-y-5">
-          <PageTitle>ilalang -- di antara mutiara</PageTitle>
-          <div className="flex justify-center items-center">
-          <img
-            src="/assets/logo.png"
-            alt="Logo ilalang"
-            className="object-contain w-28 h-28"
-          />
+        <div className="space-y-4 pb-8 pt-5 md:space-y-5 md:pt-6">
+          <PageTitle>di antara mutiara</PageTitle>
+          <div className="flex items-center justify-center py-2 md:py-3">
+            <div className="rounded-2xl border border-[#d2be9c] bg-[rgba(255,251,242,0.88)] p-3 shadow-[0_10px_24px_rgba(40,28,18,0.14)]">
+              <img
+                src="/assets/logo.png"
+                alt="Logo ilalang"
+                className="h-24 w-24 object-contain sm:h-28 sm:w-28"
+              />
+            </div>
           </div>
-          <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
+          <p className="muted-text text-base leading-8 sm:text-lg">
           Gambar diatas menggambarkan mutiara, tetapi oleh orang lain dianggap ilalang. Dipaksa menguncup, tidak mekar berkembang.
           <br/><br/>
           Seperti ilalang yang tidak diinginkan petani di ladang mereka, dalam situs ini dihimpun sajak‐sajak dari para "ilalang" dalam semesta sejarah puitika Indonesia. Bukan atas kehendak sendiri, nama dan karya mereka disingkirkan, seluruhnya atas pertimbangan politik ingatan, dibayangi kekerasan negara, yang menjadikan para perangkai kata sebagai <i>pariah</i>, bahkan harus menggelandang puluhan tahun di luar negeri.
@@ -59,11 +65,11 @@ const Blog: React.FC = (props) => {
           <br /><br />
           Usaha kecil mengabadikan ingatan tentang karya-karya sastra pengungkap kebenaran, sehingga yang dilupakan, kini mendapatkan tempat yang mulia dan terhormat, dalam sejarah kebudayaan bangsa Indonesia.
           <br /><br />
-          Gambar pada situs ini dihimpun dari <strong>Dokumenter Yayasan Lontar, Inside Indonesia</strong>, serta beberapa layaknya <a className="text-fuchsia-500 hover:underline" href="https://sejarahsosial.org">sejarahsosial.org</a>, <a className="text-fuchsia-500 hover:underline" href="https://tribunal1965.org">tribunal1965.org</a>, <a className="text-fuchsia-500 hover:underline" href="https://budidayak.blogspot.com/">budidayak.blogspot.com</a>, <a className="text-fuchsia-500 hover:underline" href="https://bl.iro.bl.uk/uv/uv.html#?manifest=https://bl.iro.bl.uk/concern/generic_works/a07bc85f-01b2-4bf1-b1cf-9354836038f1/manifest&config=https://bl.iro.bl.uk/uv/uv-config.json">British Library</a>. 
+          Gambar pada situs ini dihimpun dari <strong>Dokumenter Yayasan Lontar, Inside Indonesia</strong>, serta beberapa layaknya <a className="text-[#944129] hover:underline" href="https://sejarahsosial.org">sejarahsosial.org</a>, <a className="text-[#944129] hover:underline" href="https://tribunal1965.org">tribunal1965.org</a>, <a className="text-[#944129] hover:underline" href="https://budidayak.blogspot.com/">budidayak.blogspot.com</a>, <a className="text-[#944129] hover:underline" href="https://bl.iro.bl.uk/uv/uv.html#?manifest=https://bl.iro.bl.uk/concern/generic_works/a07bc85f-01b2-4bf1-b1cf-9354836038f1/manifest&config=https://bl.iro.bl.uk/uv/uv-config.json">British Library</a>. 
           <br/><br/>
-          Untuk penulisan profil para penulis dibantu oleh saudara <a className="text-fuchsia-500 hover:underline" href="https://x.com/ChrisWibisana">Chris Wibisana</a>, arsip dan penghimpunannya dibantu oleh kawan <a className="text-fuchsia-500 hover:underline" href="https://x.com/pribumi_merah">Alfian Widi S.</a>, dan optimalisasi kecepatan situs dibantu oleh kawan <a className="text-fuchsia-500 hover:underline" href="https://x.com/gitcommitsudoku">Wutsqo</a>.
+          Untuk penulisan profil para penulis dibantu oleh saudara <a className="text-[#944129] hover:underline" href="https://x.com/ChrisWibisana">Chris Wibisana</a>, arsip dan penghimpunannya dibantu oleh kawan <a className="text-[#944129] hover:underline" href="https://x.com/pribumi_merah">Alfian Widi S.</a>, dan optimalisasi kecepatan situs dibantu oleh kawan <a className="text-[#944129] hover:underline" href="https://x.com/gitcommitsudoku">Wutsqo</a>.
           <br/><br/>
-          Perancangan, pembangunan, serta hampir semua penghimpunan konten dari situs ini dikerjakan oleh saya sendiri. Kontak <a className="text-fuchsia-500 hover:underline" href="https://twitter.com/drepram">saya</a> di Twitter jika ada tulisan disini yang tidak benar pengetikannya ataupun juga masukan lainnya. Selamat membaca.
+          Perancangan, pembangunan, serta hampir semua penghimpunan konten dari situs ini dikerjakan oleh saya sendiri. Kontak <a className="text-[#944129] hover:underline" href="https://twitter.com/drepram">saya</a> di Twitter jika ada tulisan disini yang tidak benar pengetikannya ataupun juga masukan lainnya. Selamat membaca.
           </p>
         </div>
 

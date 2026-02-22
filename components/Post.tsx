@@ -1,5 +1,4 @@
 import React from "react";
-import ReactMarkdown from "react-markdown";
 import Link from "next/link";
 import { Post as TPost, Author as TAuthor } from "@prisma/client";
 
@@ -12,11 +11,11 @@ const Post: React.FC<Props> = ({ post, author }) => {
   const authorName = author ? author.name : "Unknown author";
   return (
     <Link
-      className="post-card cursor-pointer p-6 bg-white shadow rounded-lg hover:shadow-lg transition-shadow duration-200"
+      className="editor-card cursor-pointer p-6"
       href={`/p/${post.id}`}
     >
-      <h2 className="text-xl font-bold mb-2">
-        <ReactMarkdown>{post.title}</ReactMarkdown>
+      <h2 className="mb-2 text-xl font-bold text-[#2f241c]">
+        {post.title}
       </h2>
       {/* <small className="text-gray-600">oleh {authorName}</small> */}
       {/* <div className="prose dark:prose-dark mt-4">

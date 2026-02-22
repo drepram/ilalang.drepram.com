@@ -48,9 +48,9 @@ const Drafts: React.FC<Props> = (props) => {
   return (
     <Layout>
       <div className="page">
-        <h1>Tulisan Belum Tayang</h1>
+        <h1 className="mb-4 text-3xl font-bold text-[#2f241c]">Tulisan Belum Tayang</h1>
         <main>
-          <ul className="divide-y divide-gray-200 dark:divide-gray-700">
+          <ul className="divide-y divide-[#d8c6a7]">
             {props.drafts.map((post) => (
               <li key={post.id} className="py-12">
                 <article className="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
@@ -65,23 +65,23 @@ const Drafts: React.FC<Props> = (props) => {
                       <div>
                         <h3 className="text-2xl font-bold leading-8 tracking-tight">
                           <Link href={`/p/${post.id}`} legacyBehavior>
-                            <a className="text-black-900 dark:text-black-100">
+                            <a className="text-[#2f241c]">
                               {post.title}
                             </a>
                           </Link>
                         </h3>
-                        <div className="mr-3 text-sm font-medium text-pink-500 hover:text-pink-600 dark:hover:text-pink-400">
+                        <div className="mr-3 text-sm font-medium text-[#944129] hover:text-[#7f2f20]">
                           {post.author.name}
                         </div>
                       </div>
-                      <div className="prose max-w-none text-gray-500 dark:text-gray-400">
+                      <div className="prose max-w-none muted-text">
                         <ReactMarkdown>{post.content}</ReactMarkdown>
                       </div>
                     </div>
                     <div className="text-base font-medium leading-6">
                       <Link href={`/p/${post.id}`} legacyBehavior>
                         <a
-                          className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                          className="text-[#944129] hover:text-[#7f2f20]"
                           aria-label={`Read "${post.title}"`}
                         >
                           Baca &rarr;
@@ -96,17 +96,11 @@ const Drafts: React.FC<Props> = (props) => {
         </main>
       </div>
       <style jsx>{`
-        .post {
-          background: var(--geist-background);
-          transition: box-shadow 0.1s ease-in;
-        }
-
-        .post:hover {
-          box-shadow: 1px 1px 3px #aaa;
-        }
-
-        .post + .post {
-          margin-top: 2rem;
+        .page {
+          border: 1px solid #dac9ab;
+          border-radius: 16px;
+          background: rgba(255, 252, 244, 0.82);
+          padding: 1.5rem;
         }
       `}</style>
     </Layout>

@@ -9,25 +9,36 @@ import prisma from "../../lib/prisma";
 import PageTitle from "../../components/PageTitle";
 import Link from "next/link";
 import { Post as TPost, Author as TAuthor } from "@prisma/client";
-import Meta, { OGType, SITE_URL } from "../../components/Meta";
+import Meta, {
+  OGType,
+  SITE_URL,
+} from "../../components/Meta";
 
 interface Props extends TPost {
   author: TAuthor;
 }
 
 export const getStaticPaths = (async () => {
-  const posts = await prisma.post.findMany({
-    select: {
-      id: true,
-    },
-  });
+  try {
+    const posts = await prisma.post.findMany({
+      select: {
+        id: true,
+      },
+    });
 
-  return {
-    paths: posts.map((post) => ({
-      params: { id: post.id },
-    })),
-    fallback: true,
-  };
+    return {
+      paths: posts.map((post) => ({
+        params: { id: post.id },
+      })),
+      fallback: true,
+    };
+  } catch (error) {
+    console.warn("Failed to prebuild post paths", error);
+    return {
+      paths: [],
+      fallback: true,
+    };
+  }
 }) satisfies GetStaticPaths;
 
 export const getStaticProps = (async (context) => {
@@ -56,6 +67,8 @@ async function modifyPost(): Promise<void> {
 const Post: React.FC<Props> = ({ author, ...props }) => {
   const { data: session, status } = useSession();
   const description = `Baca "${props.title}" di ilalang`;
+  const pageTitle = `${props.title} -- puisi | ilalang`;
+  const pageDescription = `Karya ${author?.name || "penulis"} di ilalang. Melawan kekerasan budaya melalui ingatan sastra.`;
   const image = author?.profilePicture || "/assets/og.png";
   const structuredData = author
     ? {
@@ -83,8 +96,9 @@ const Post: React.FC<Props> = ({ author, ...props }) => {
     return (
       <Layout showFooter={false}>
         <Meta
-          title={props.title}
-          description={description}
+          title={pageTitle}
+          titleSuffix=""
+          description={pageDescription}
           image={image}
           ogType={OGType.Article}
           url={`/p/${props.id}`}
@@ -105,33 +119,36 @@ const Post: React.FC<Props> = ({ author, ...props }) => {
   return (
     <Layout showFooter={false}>
       <Meta
-        title={props.title}
-        description={description}
+        title={pageTitle}
+        titleSuffix=""
+        description={pageDescription}
         image={image}
         ogType={OGType.Article}
         url={`/p/${props.id}`}
         structuredData={structuredData}
       />
       <section className="max-w-screen-sm mx-auto px-4">
-        <article className="mx-auto max-w-full px-4">
+        <article className="mx-auto max-w-full px-2 sm:px-4">
           <header>
-            <div className="space-y-1 border-b border-gray-200 pb-10 text-center dark:border-gray-700">
+            <div className="space-y-1 border-b border-[#d8c6a7] pb-8 pt-2 text-center sm:pb-10 sm:pt-4">
               <div>
-                <h1 className="text-sm mb-10">
+                <h1 className="mb-7 mt-2 text-sm sm:mb-10 sm:mt-3">
                   <Link legacyBehavior href={authorUrl}>
-                    <span className="text-fuchsia-500 hover:underline">
+                    <span className="text-[#944129] hover:underline">
                       &larr; {author.name}
                     </span>
                   </Link>
                 </h1>
-                <PageTitle>
-                  <ReactMarkdown>{title}</ReactMarkdown>
-                </PageTitle>
+                <div className="mx-auto max-w-3xl text-[2.2rem] leading-[1.08] sm:text-[3.2rem]">
+                  <PageTitle>
+                    {title}
+                  </PageTitle>
+                </div>
               </div>
             </div>
           </header>
-          <div className="absolute left-0 right-0 divide-y divide-gray-200 pb-8 dark:divide-gray-700 lg:relative lg:left-auto lg:right-auto lg:divide-y lg:divide-gray-200 lg:pb-8 lg:dark:divide-gray-700">
-            <div className="prose pb-8 pt-10 dark:prose-invert leading-relaxed mx-auto whitespace-pre-wrap break-words p-2 rounded-md overflow-x-auto">
+          <div className="divide-y divide-[#d8c6a7] pb-8">
+            <div className="prose mx-auto overflow-x-auto whitespace-pre-wrap break-words rounded-md pb-8 pt-8 leading-relaxed sm:pt-10">
               <ReactMarkdown
                 rehypePlugins={[rehypeRaw] as any}
                 className="markdown-content"
@@ -143,7 +160,7 @@ const Post: React.FC<Props> = ({ author, ...props }) => {
               <div className="pt-4">
                 <button
                   onClick={() => modifyPost()}
-                  className="flex items-center bg-blue-500 text-white font-bold py-1 px-2 rounded focus:outline-none focus:shadow-outline hover:bg-blue-700"
+                  className="btn-primary flex items-center"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

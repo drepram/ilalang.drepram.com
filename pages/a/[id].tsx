@@ -4,25 +4,36 @@ import Layout from "../../components/Layout";
 import Post from "../../components/Post";
 import prisma from "../../lib/prisma";
 import type { Author as TAuthor, Post as TPost } from "@prisma/client";
-import Meta, { OGType, SITE_URL } from "../../components/Meta";
+import Meta, {
+  OGType,
+  SITE_URL,
+} from "../../components/Meta";
 
 interface Props extends TAuthor {
   posts: TPost[];
 }
 
 export const getStaticPaths = (async () => {
-  const authors = await prisma.author.findMany({
-    select: {
-      id: true,
-    },
-  });
+  try {
+    const authors = await prisma.author.findMany({
+      select: {
+        id: true,
+      },
+    });
 
-  return {
-    paths: authors.map((author) => ({
-      params: { id: author.id },
-    })),
-    fallback: true,
-  };
+    return {
+      paths: authors.map((author) => ({
+        params: { id: author.id },
+      })),
+      fallback: true,
+    };
+  } catch (error) {
+    console.warn("Failed to prebuild author paths", error);
+    return {
+      paths: [],
+      fallback: true,
+    };
+  }
 }) satisfies GetStaticPaths;
 
 export const getStaticProps = (async (context) => {
@@ -58,6 +69,8 @@ export const getStaticProps = (async (context) => {
 const AuthorPage: React.FC<Props> = (author) => {
   const description =
     author.description || author.bio || "Profil penulis di ilalang.";
+  const pageTitle = `${author.name} -- profil penulis | ilalang`;
+  const pageDescription = `${description} Melawan kekerasan budaya dengan mengabadikan ingatan.`;
   const image = author.profilePicture || "/assets/og.png";
   const structuredData = {
     "@context": "https://schema.org",
@@ -76,8 +89,9 @@ const AuthorPage: React.FC<Props> = (author) => {
     return (
       <Layout>
         <Meta
-          title={author.name}
-          description={description}
+          title={pageTitle}
+          titleSuffix=""
+          description={pageDescription}
           image={image}
           ogType={OGType.Profile}
           url={`/a/${author.id}`}
@@ -93,29 +107,30 @@ const AuthorPage: React.FC<Props> = (author) => {
   return (
     <Layout>
       <Meta
-        title={author.name}
-        description={description}
+        title={pageTitle}
+        titleSuffix=""
+        description={pageDescription}
         image={image}
         ogType={OGType.Profile}
         url={`/a/${author.id}`}
         structuredData={structuredData}
       />
       <div className="page mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-        <div className="author-profile my-8 p-6 bg-white shadow rounded-lg flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-10">
+        <div className="author-profile my-8 flex flex-col items-center space-y-4 rounded-2xl border border-[#dac9ab] bg-[rgba(255,252,245,0.9)] p-6 shadow-[0_14px_30px_rgba(42,30,18,0.1)] sm:flex-row sm:space-x-10 sm:space-y-0">
           <img
             src={author.profilePicture}
             alt={`${author.name}'s profile`}
-            className="w-24 h-24 rounded-full object-cover"
+            className="h-24 w-24 rounded-full border-2 border-[#cfb48b] object-cover"
           />
           <div className="text-center sm:text-left">
-            <h1 className="text-3xl font-bold text-black-900 dark:text-black-100 mb-2">
+            <h1 className="mb-2 text-3xl font-bold text-[#2f241c]">
               {author.name}
             </h1>
-            <h5 className="text-gray-600 dark:text-gray-400 mb-2">
+            <h5 className="mb-2 text-[#6d5e50]">
               {author.yearOfLife}
             </h5>
-            <hr className="w-full sm:w-auto my-2" />
-            <p className="text-gray-600 dark:text-gray-400 mt-4 text-sm">
+            <hr className="my-2 w-full border-[#ddcbae] sm:w-auto" />
+            <p className="mt-4 text-sm text-[#5f5244]">
               {author.bio}
             </p>
           </div>
@@ -131,17 +146,8 @@ const AuthorPage: React.FC<Props> = (author) => {
         </main>
       </div>
       <style jsx>{`
-        .post {
-          transition: box-shadow 0.1s ease-in;
-        }
-
-        .post:hover {
-          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
         .page {
-          background: var(--geist-background);
-          padding: 2rem;
+          padding: 1rem;
         }
       `}</style>
     </Layout>

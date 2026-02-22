@@ -8,143 +8,52 @@ const Header = () => {
 
   const { data: session, status } = useSession();
 
-  let left = (
-    <div className={`left ${!session ? "flex justify-center w-full" : "ml-10"}`}>
-      <Link legacyBehavior href="/">
-        <a className="bold" data-active={!isActive("/")}>
-          ilalang
-        </a>
-      </Link>
-      {session && (
-        <Link legacyBehavior href="/drafts">
-          <a data-active={!isActive("/drafts")}>My drafts</a>
-        </Link>
-      )}
-      <style jsx>{`
-        .bold {
-          font-weight: bold;
-        }
-
-        a {
-          text-decoration: none;
-          color: var(--geist-foreground);
-          display: inline-block;
-        }
-
-        .left a[data-active="true"] {
-          color: gray;
-        }
-
-        a + a {
-          margin-left: 1rem;
-        }
-      `}</style>
-    </div>
-  );
-
-  let right = null;
-
-  if (status === "loading") {
-    right = false;
-  } else if (!session) {
-    right = (
-      <div className="right">
-        <style jsx>{`
-          a {
-            text-decoration: none;
-            color: var(--geist-foreground);
-            display: inline-block;
-          }
-
-          a + a {
-            margin-left: 1rem;
-          }
-
-          .right {
-            margin-left: auto;
-          }
-
-          .right a {
-            border: 1px solid var(--geist-foreground);
-            padding: 0.5rem 1rem;
-            border-radius: 3px;
-          }
-        `}</style>
-      </div>
-    );
-  } else if (session) {
-    right = (
-      <div className="right mr-10">
-        <p>({session.user?.email})</p>
-        <Link legacyBehavior href="/create/post">
-          <button>
-            <a>New post</a>
-          </button>
-        </Link>
-        <Link legacyBehavior href="/create/author">
-          <button>
-            <a>New author</a>
-          </button>
-        </Link>
-        <Link legacyBehavior href="/edit/post">
-          <button>
-            <a>Edit post</a>
-          </button>
-        </Link>
-        <Link legacyBehavior href="/edit/author">
-          <button>
-            <a>Edit author</a>
-          </button>
-        </Link>
-        <button onClick={() => signOut()}>
-          <a>Log out</a>
-        </button>
-        <style jsx>{`
-          a {
-            text-decoration: none;
-            color: var(--geist-foreground);
-            display: inline-block;
-          }
-
-          p {
-            display: inline-block;
-            font-size: 13px;
-            padding-right: 1rem;
-          }
-
-          a + a {
-            margin-left: 1rem;
-          }
-
-          .right {
-            margin-left: auto;
-          }
-
-          .right a {
-            border: 1px solid var(--geist-foreground);
-            padding: 0.5rem 1rem;
-            border-radius: 3px;
-          }
-
-          button {
-            border: none;
-          }
-        `}</style>
-      </div>
-    );
-  }
-
   return (
-    <header className="flex items-center justify-between py-10">
-      {left}
-      {right}
-      <style jsx>{`
-        nav {
-          display: flex;
-          padding: 2rem;
-          align-items: center;
-        }
-      `}</style>
+    <header className="sticky top-0 z-40 border-b border-[#dac9ab] bg-[rgba(255,252,245,0.92)] backdrop-blur">
+      <div className="flex flex-col gap-3 px-4 py-3 sm:px-8 sm:py-4">
+        <div
+          className={`flex items-center gap-3 ${
+            status !== "loading" && session ? "justify-between" : "justify-center"
+          }`}
+        >
+          <Link href="/" className="text-2xl font-bold tracking-wide text-[#3f2d22] sm:text-3xl">
+            ilalang
+          </Link>
+          {status !== "loading" && session && (
+            <p className="truncate text-xs text-[#6f5f4f]">{session.user?.email}</p>
+          )}
+        </div>
+
+        {status !== "loading" && session && (
+          <nav className="flex flex-wrap items-center gap-2 text-sm">
+            <Link
+              href="/drafts"
+              className={`rounded-full px-3 py-1 ${
+                isActive("/drafts")
+                  ? "bg-[#ead7b8] text-[#3b2b1f]"
+                  : "text-[#755843]"
+              }`}
+            >
+              Draft
+            </Link>
+            <Link href="/create/post" className="btn-secondary text-sm">
+              Tulis
+            </Link>
+            <Link href="/create/author" className="btn-secondary text-sm">
+              Penulis Baru
+            </Link>
+            <Link href="/edit/post" className="btn-secondary text-sm">
+              Sunting Tulisan
+            </Link>
+            <Link href="/edit/author" className="btn-secondary text-sm">
+              Sunting Penulis
+            </Link>
+            <button onClick={() => signOut()} className="btn-primary text-sm">
+              Keluar
+            </button>
+          </nav>
+        )}
+      </div>
     </header>
   );
 };

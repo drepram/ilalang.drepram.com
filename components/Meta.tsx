@@ -20,6 +20,8 @@ interface MetaProps {
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://ilalang.drepram.com";
+const SITE_TITLE = "ilalang";
+const SITE_DESCRIPTION = "mengabadikan ingatan";
 
 const Meta: FC<MetaProps> = ({
   title,
@@ -52,7 +54,7 @@ const Meta: FC<MetaProps> = ({
       <meta property="og:image" content={ogImage} />
       <meta property="og:image:alt" content={titleText} />
       <meta property="og:locale" content="id_ID" />
-      <meta property="og:site_name" content="ilalang -- mengabadikan ingatan" />
+      <meta property="og:site_name" content={SITE_TITLE} />
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={titleText} />
       <meta name="twitter:description" content={`${description}`} />
@@ -71,4 +73,4 @@ const Meta: FC<MetaProps> = ({
 };
 
 export default Meta;
-export { OGType, type MetaProps, SITE_URL };
+export { OGType, type MetaProps, SITE_URL, SITE_TITLE, SITE_DESCRIPTION };

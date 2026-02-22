@@ -33,50 +33,17 @@ const Layout: React.FC<Props> = ({ children, showFooter = true }) => {
   }, []);
 
   return (
-    <div>
-      <Header />
+    <div className="site-shell">
+      <div className="surface-panel overflow-hidden">
+        <Header />
+        <main className="px-4 pb-8 sm:px-8">{children}</main>
+        {showFooter && <Footer />}
+      </div>
       {isLoading && (
-        <div className="fixed inset-0 bg-white bg-opacity-75 flex items-center justify-center z-50">
-          <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-gray-900"></div>
+        <div className="fixed left-0 right-0 top-0 z-50 h-1 bg-[#d4b487]">
+          <div className="h-full w-full animate-pulse bg-[#8d3a26]" />
         </div>
       )}
-      <div className="layout">{children}</div>
-      <style jsx global>{`
-        html {
-          box-sizing: border-box;
-        }
-
-        *,
-        *:before,
-        *:after {
-          box-sizing: inherit;
-        }
-
-        body {
-          margin: 0;
-          padding: 0;
-          font-size: 16px;
-          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-            Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
-            "Segoe UI Symbol";
-          background: rgba(0, 0, 0, 0.05);
-        }
-
-        input,
-        textarea {
-          font-size: 16px;
-        }
-
-        button {
-          cursor: pointer;
-        }
-      `}</style>
-      <style jsx>{`
-        .layout {
-          padding: 0 2rem;
-        }
-      `}</style>
-      {showFooter && <Footer />}
     </div>
   );
 };

@@ -7,7 +7,11 @@ import PageTitle from "../components/PageTitle";
 import SectionContainer from "../components/SectionContainer";
 import prisma from "../lib/prisma";
 import { Author as TAuthor, Post as TPost } from "@prisma/client";
-import Meta, { OGType, SITE_URL } from "../components/Meta";
+import Meta, {
+  OGType,
+  SITE_TITLE,
+  SITE_URL,
+} from "../components/Meta";
 
 export const getStaticProps: GetStaticProps = async () => {
   const feed = await prisma.post
@@ -42,7 +46,7 @@ type Props = {
   authors: TAuthor[];
 };
 
-const metaTitle = "ilalang -- mengabadikan ingatan";
+const metaTitle = `${SITE_TITLE} -- mengabadikan ingatan`;
 const metaDescription =
   "Repositori karya para ilalang dari 1946 sampai 1965. Melawan kekerasan negara dengan mengabadikan ingatan mereka yang sengaja dilupakan.";
 
@@ -69,15 +73,15 @@ const Blog: React.FC<Props> = ({ feed, authors }) => {
       />
       <SectionContainer>
         <div className="space-y-2 pb-8 pt-6 md:space-y-5">
-          <PageTitle>ilalang -- mengabadikan ingatan</PageTitle>
-          <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
+          <PageTitle>mengabadikan ingatan</PageTitle>
+          <p className="text-lg leading-7 muted-text">
             Seperti ilalang yang tidak diinginkan petani di ladang mereka, dalam situs ini dihimpun sajak‐sajak dari para "ilalang" dalam semesta sejarah puitika Indonesia. Bukan atas kehendak sendiri, nama dan karya mereka disingkirkan, seluruhnya atas pertimbangan politik ingatan, dibayangi kekerasan negara, yang menjadikan para perangkai kata sebagai <i>pariah</i>, bahkan harus menggelandang puluhan tahun di luar negeri.
           </p>
         </div>
 
-        <div className="divide-y divide-gray-200 dark:divide-gray-700">
+        <div className="divide-y soft-divider">
           <div className="space-y-2 pb-8 pt-6 md:space-y-5">
-            <h2 className="text-2xl font-extrabold leading-9 tracking-tight text-black-900 dark:text-black-100 sm:text-3xl sm:leading-10 md:text-4xl md:leading-14">
+            <h2 className="section-title font-extrabold tracking-tight">
               Mutiara
             </h2>
           </div>
@@ -96,9 +100,9 @@ const Blog: React.FC<Props> = ({ feed, authors }) => {
           </div>
         </div>
 
-        <div className="divide-y divide-gray-200 dark:divide-gray-700">
+        <div className="divide-y soft-divider">
           <div className="space-y-2 pb-8 pt-6 md:space-y-5">
-            <h2 className="text-2xl font-extrabold leading-9 tracking-tight text-black-900 dark:text-black-100 sm:text-3xl sm:leading-10 md:text-4xl md:leading-14">
+            <h2 className="section-title font-extrabold tracking-tight">
               Sorotan
             </h2>
           </div>

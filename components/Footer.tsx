@@ -2,29 +2,12 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer>
-      <div className="mt-16 flex flex-col items-center">
-        <div className="mb-3 flex space-x-4">
-          {/* <SocialIcon kind="mail" href={`mailto:${siteMetadata.email}`} size={6} />
-          <SocialIcon kind="github" href={siteMetadata.github} size={6} />
-          <SocialIcon kind="facebook" href={siteMetadata.facebook} size={6} />
-          <SocialIcon kind="youtube" href={siteMetadata.youtube} size={6} />
-          <SocialIcon kind="linkedin" href={siteMetadata.linkedin} size={6} />
-          <SocialIcon kind="twitter" href={siteMetadata.twitter} size={6} />
-          <SocialIcon kind="x" href={siteMetadata.x} size={6} />
-          <SocialIcon kind="instagram" href={siteMetadata.instagram} size={6} />
-          <SocialIcon kind="threads" href={siteMetadata.threads} size={6} /> */}
-        </div>
-        <div className="mb-2 flex space-x-2 text-sm text-gray-500 dark:text-gray-400">
-          {/* <div>ilalang</div>
-          <div>{` • `}</div> */}
-          <div>{`${new Date().getFullYear()}`}</div>
-          <div>{` • `}</div>
-          <Link legacyBehavior href="/tentang">
-            <a className="text-fuchsia-500 hover:underline">tentang</a>
-          </Link>
-        </div>
-        <div className="mb-8 text-sm text-gray-500 dark:text-gray-400"></div>
+    <footer className="mt-10 border-t border-[#dcc8a9] px-4 py-6 sm:px-8">
+      <div className="flex flex-col items-center gap-2 text-sm text-[#665a4d] sm:flex-row sm:justify-between">
+        <p>berdiri sejak 17 Agustus 2024</p>
+        <Link href="/tentang" className="font-medium text-[#944129] hover:underline">
+          tentang ilalang
+        </Link>
       </div>
     </footer>
   );

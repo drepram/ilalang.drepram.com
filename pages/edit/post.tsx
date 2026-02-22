@@ -100,18 +100,18 @@ const EditPost: React.FC = () => {
 
   return (
     <Layout>
-      <div className="flex items-center justify-center  bg-gray-100">
+      <div className="flex items-center justify-center py-6">
         <form
           onSubmit={submitData}
-          className="w-full max-w-2xl bg-white rounded-lg shadow-md p-8"
+          className="form-shell w-full max-w-2xl p-8"
         >
-          <h1 className="text-2xl font-bold mb-6">Edit Post</h1>
+          <h1 className="mb-6 text-2xl font-bold text-[#2f241c]">Edit Post</h1>
           <div className="mb-4">
-            <label className="block text-gray-700">Author</label>
+            <label className="field-label block">Author</label>
             <select
               value={selectedAuthor}
               onChange={(e) => setSelectedAuthor(e.target.value)}
-              className="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              className="field-select"
             >
               <option value="">Select an author</option>
               {authors.map((author) => (
@@ -122,12 +122,12 @@ const EditPost: React.FC = () => {
             </select>
           </div>
           <div className="mb-4">
-            <label className="block text-gray-700">Post</label>
+            <label className="field-label block">Post</label>
             <select
               value={selectedPost}
               onChange={(e) => setSelectedPost(e.target.value)}
               disabled={!selectedAuthor}
-              className="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              className="field-select"
             >
               <option value="">Select a post</option>
               {posts.map((post) => (
@@ -138,57 +138,57 @@ const EditPost: React.FC = () => {
             </select>
           </div>
           <div className="mb-4">
-            <label className="block text-gray-700">Title</label>
+            <label className="field-label block">Title</label>
             <input
               autoFocus
               onChange={(e) => setTitle(e.target.value)}
               placeholder="Title"
               type="text"
               value={title}
-              className="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              className="field-input"
             />
           </div>
           <div className="mb-4">
-            <label className="block text-gray-700">Content</label>
+            <label className="field-label block">Content</label>
             <textarea
               cols={50}
               onChange={(e) => setContent(e.target.value)}
               placeholder="Content"
               rows={8}
               value={content}
-              className="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              className="field-textarea"
             />
           </div>
           <div className="mb-4">
-            <label className="block text-gray-700">Status</label>
+            <label className="field-label block">Status</label>
             <select
               value={published.toString()}
               onChange={(e) => setPublished(e.target.value === "true")}
-              className="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              className="field-select"
             >
               <option value="true">Published</option>
               <option value="false">Draft</option>
             </select>
           </div>
           <div className="mb-4">
-            <label className="block text-gray-700">Highlighted</label>
+            <label className="field-label block">Highlighted</label>
             <select
               value={highlighted.toString()}
               onChange={(e) => setHighlighted(e.target.value === "true")}
-              className="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              className="field-select"
             >
               <option value="true">Yes</option>
               <option value="false">No</option>
             </select>
           </div>
           <div className="mb-4">
-            <label className="block text-gray-700">
+            <label className="field-label block">
               Change Author (optional)
             </label>
             <select
               value={newAuthor}
               onChange={(e) => setNewAuthor(e.target.value)}
-              className="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              className="field-select"
             >
               <option value="">Select an author</option>
               {authors.map((author) => (
@@ -203,19 +203,19 @@ const EditPost: React.FC = () => {
               disabled={!content || !title || !selectedPost}
               type="submit"
               value="Update"
-              className="bg-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline hover:bg-blue-700 disabled:opacity-50"
+              className="btn-primary"
             />
             <button
               type="button"
               onClick={deletePost}
               disabled={!selectedPost}
-              className="ml-4 bg-red-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline hover:bg-red-700 disabled:opacity-50"
+              className="btn-danger ml-4"
             >
               Delete
             </button>
           </div>
           <button
-            className="mt-4 text-gray-700 hover:text-gray-900"
+            className="btn-secondary mt-4"
             onClick={() => Router.push("/")}
           >
             Cancel
