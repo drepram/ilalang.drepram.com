@@ -40,7 +40,7 @@ const Blog: React.FC = () => {
       />
       <SectionContainer>
         <div className="space-y-5 pb-8 pt-5 md:space-y-6 md:pt-6">
-          <PageTitle>Di Antara Mutiara</PageTitle>
+          <PageTitle>di antara mutiara</PageTitle>
           <h2 className="-mt-1 text-xl italic leading-relaxed text-[#6a5442] sm:text-2xl">
             Melawan Kekerasan Negara. Mengabadikan Ingatan.
           </h2>
@@ -62,7 +62,7 @@ const Blog: React.FC = () => {
               Apa yang hari ini kita anggap sebagai ilalang, bisa jadi adalah
               mutiara yang dipaksa menguncup. Dalam sejarah sastra Indonesia,
               ada nama-nama yang sengaja disingkirkan dan karyanya dikubur
-              hidup-hidup - bukan karena tak bernilai, tapi karena <strong>politik
+              hidup-hidup -- bukan karena tak bernilai, tapi karena <strong>politik
               ingatan</strong> dan represi negara yang membuat para perangkai katanya
               menjadi pariah, bahkan harus terasing puluhan tahun di negeri orang.
             </p>
@@ -70,11 +70,8 @@ const Blog: React.FC = () => {
             <p>
               Situs ini hadir sebagai rumah bagi mereka yang &quot;dilupakan&quot;.
               Di sini, kami menghimpun lebih dari <strong>326 karya</strong> (puisi,
-              cerpen, hingga drama) dari sosok seperti <strong>Agam Wispi, Hadi S.,
-              Sobron Aidit, Sabar Anantaguna, A.S. Dharta, H.R. Bandaharo,
-              F.L. Risakotta, Bakri Siregar, Sugiarti Siswadi, dan Siti Rukiah
-              Kertapati</strong>. Mereka adalah bagian dari <strong>Lembaga
-              Kebudajaan Rakjat (Lekra)</strong> - sebuah gerakan
+              cerpen, hingga drama) dari sosok seperti <strong>Agam Wispi, Hadi S., Sobron Aidit, Sabar Anantaguna, A.S. Dharta, H.R. Bandaharo, F.L. Risakotta, Bakri Siregar, Sugiarti Siswadi, dan Siti Rukiah Kertapati</strong>. Mereka adalah bagian dari <strong>Lembaga
+              Kebudajaan Rakjat (Lekra)</strong> -- sebuah gerakan
               budaya yang lahir pada 17 Agustus 1950, namun dihancurkan dalam
               badai kekerasan 1965-1966.
             </p>
@@ -84,16 +81,14 @@ const Blog: React.FC = () => {
             </h3>
 
             <p>
-              Karya-karya di situs ini bukan sekadar barisan kata, melainkan
-              <strong>zeitgeist</strong> (semangat zaman) yang jujur. Mereka
-              menyuarakan penderitaan rakyat kecil - kaum tani dan nelayan yang
-              dirampas haknya - yang seringkali tak mampu membela diri di hadapan
+              Karya-karya di situs ini bukan sekadar barisan kata, melainkan <strong>zeitgeist</strong> (semangat zaman) yang jujur. Mereka
+              menyuarakan penderitaan rakyat kecil -- kaum tani dan nelayan yang
+              dirampas haknya -- yang seringkali tak mampu membela diri di hadapan
               penguasa dan tuan tanah.
             </p>
 
             <p>
-              Menghapus karya-karya ini adalah bentuk <strong>kekerasan budaya</strong>
-              (Herlambang, 2013) yang dilakukan secara sistematis oleh Orde Baru.
+              Menghapus karya-karya ini adalah bentuk <strong>kekerasan budaya</strong> (Herlambang, 2013) yang dilakukan secara sistematis oleh Orde Baru.
               Kami ingin memulihkan ingatan itu, terutama bagi <strong>Generasi Z</strong>,
               agar tidak terputus secara spiritual dari sejarah bangsanya sendiri.
               Apa yang dulu dibuang bagai tebu habis sepah, kini kami beri tempat
@@ -143,10 +138,6 @@ const Blog: React.FC = () => {
               </li>
             </ul>
 
-            <h3 className="pt-1 text-2xl font-semibold leading-tight text-[#3a2d23]">
-              Kolaborasi Spesial: Kacabenggala Editions
-            </h3>
-
             <p>
               Situs ini juga terhubung dengan proyek
               <a
@@ -154,8 +145,7 @@ const Blog: React.FC = () => {
                 href="https://kabe.drepram.com"
               >
                 {" "}<strong>Kacabenggala Editions</strong>
-              </a>
-              {" "}(kabe.drepram.com), sebuah upaya merestorasi buku-buku yang
+              </a>, sebuah upaya merestorasi buku-buku yang
               sudah tidak lagi beredar (<em>out-of-print</em>).
             </p>
 
